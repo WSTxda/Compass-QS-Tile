@@ -96,7 +96,7 @@ class TileService : android.service.quicksettings.TileService(), SensorEventList
     private fun stopCompass() {
         Log.i(TAG, "Stop")
         sensorManager.unregisterListener(this)
-        stopForeground(true)
+        stopForeground(STOP_FOREGROUND_DETACH)
     }
 
     override fun onAccuracyChanged(sensor: Sensor, accuracy: Int) = Unit
