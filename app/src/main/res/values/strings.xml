@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">Compass Tile</string>
     <string name="channel_name">Compass</string>
-    <string name="not_supported">Your device does not have a compass</string>
+    <string name="not_supported">Your device does not support this app</string>
     <string name="tile_label">Compass</string>
     <string name="tile_label_degrees" translatable="false">%1$d° %2$s</string>
     <string name="N">N</string>

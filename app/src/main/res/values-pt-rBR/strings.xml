@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">Atalho de bússola</string>
     <string name="channel_name">Bússola</string>
-    <string name="not_supported">Seu dispositivo não suporta bússola</string>
+    <string name="not_supported">Seu dispositivo não suporta este aplicativo</string>
     <string name="tile_label">Bússola</string>
     <string name="N">Norte</string>
     <string name="NE">Nordeste</string>
