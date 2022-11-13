@@ -19,6 +19,8 @@ fun TileService.channel() = NotificationChannel(
 
 fun TileService.notification(): Notification = NotificationCompat.Builder(this, CHANNEL_ID)
     .setSmallIcon(R.drawable.ic_notification)
+    .setContentTitle(getString(R.string.notification_title))
+    .setContentText(getString(R.string.notification_label))
     .setContentIntent(notificationClickIntent())
     .build()
 
