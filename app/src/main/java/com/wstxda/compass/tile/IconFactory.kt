@@ -23,7 +23,7 @@ class IconFactory(context: Context, @DrawableRes drawableRes: Int) {
         Canvas(iconBitmap).apply {
             drawColor(Color.BLACK, PorterDuff.Mode.CLEAR) // clear all
             rotate(-degrees, width / 2f, height / 2f)
-            arrowDrawable.setBounds(0, 0, width, height);
+            arrowDrawable.setBounds(0, 0, width, height)
             arrowDrawable.draw(this)
         }
         return Icon.createWithBitmap(iconBitmap)
