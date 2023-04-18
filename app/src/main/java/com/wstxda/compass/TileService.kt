@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.wstxda.compass
 
 import android.app.NotificationManager
@@ -24,6 +26,14 @@ class TileService : android.service.quicksettings.TileService(), SensorEventList
 
     private val notificationManager
         get() = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+
+    private val sensor by lazy {
+        // TYPE_ROTATION_VECTOR is a fusion of gyro, accelerometer and magnetometer, which is more
+        // accurate and responsive than just using the magnetometer.
+        // TYPE_GEOMAGNETIC_ROTATION_VECTOR is used as a fallback if gyro is not available.
+        sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR)
+            ?: sensorManager.getDefaultSensor(Sensor.TYPE_GEOMAGNETIC_ROTATION_VECTOR)
+    }
 
     private val isSupported
         get() = sensor != null
