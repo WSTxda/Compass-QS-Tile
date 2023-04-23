@@ -1,5 +1,3 @@
-@file:Suppress("DEPRECATION")
-
 package com.wstxda.compass
 
 import android.app.NotificationManager
