@@ -6,7 +6,6 @@
     <string name="tile_label">Kompas</string>
     <string name="notification_title">Servis işləyir</string>
     <string name="notification_label">Bildirişi gizlətmək üçün bura toxunun</string>
-    <string name="tile_label_degrees" translatable="false">%1$d° %2$s</string>
     <string name="N">Şimal</string>
     <string name="NE">Şimal-şərq</string>
     <string name="E">Şərq</string>
