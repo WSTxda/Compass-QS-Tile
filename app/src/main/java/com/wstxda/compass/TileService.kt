@@ -64,9 +64,7 @@ class TileService : android.service.quicksettings.TileService(), SensorEventList
     }
 
     override fun onStopListening() {
-        when (qsTile?.state) {
-            Tile.STATE_ACTIVE -> stopCompass()
-        }
+        setInactive()
     }
 
     override fun onClick() {
