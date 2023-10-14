@@ -4,11 +4,11 @@ plugins {
 }
 android {
     namespace 'com.wstxda.compass'
-    compileSdk 34
+    compileSdk 33
     defaultConfig {
         applicationId 'com.wstxda.compass'
         minSdkVersion 26
-        targetSdkVersion 34
+        targetSdkVersion 33
         versionCode 210
         versionName "2.1"
     }

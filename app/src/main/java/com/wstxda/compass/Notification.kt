@@ -16,9 +16,10 @@ fun TileService.channel() = NotificationChannel(
 )
 
 fun TileService.notification(): Notification =
-    NotificationCompat.Builder(this, CHANNEL_ID).setSmallIcon(R.drawable.ic_launcher_foreground)
+    NotificationCompat.Builder(this, CHANNEL_ID).setSmallIcon(R.drawable.ic_notification)
+        .setContentTitle(getString(R.string.notification_title))
+        .setContentText(getString(R.string.notification_label))
         .setContentIntent(notificationClickIntent()).build()
-
 
 fun TileService.notificationClickIntent(): PendingIntent {
     val intent = Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS).apply {
@@ -27,9 +28,6 @@ fun TileService.notificationClickIntent(): PendingIntent {
         addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
     }
     return PendingIntent.getActivity(
-        this,
-        0,
-        intent,
-        PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT,
+        this, 0, intent, PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
     )
 }

@@ -1,7 +1,6 @@
 package com.wstxda.compass
 
 import android.app.NotificationManager
-import android.content.pm.ServiceInfo
 import android.graphics.drawable.Icon
 import android.hardware.Sensor
 import android.hardware.SensorEvent
@@ -12,7 +11,6 @@ import android.service.quicksettings.Tile
 import android.util.Log
 import android.view.Display
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.core.content.getSystemService
 import com.wstxda.compass.tile.IconFactory
 import com.wstxda.compass.tile.label
@@ -100,10 +98,9 @@ class TileService : android.service.quicksettings.TileService(), SensorEventList
         stopCompass()
     }
 
-    @RequiresApi(34)
     private fun startCompass() {
         Log.i(TAG, "Start")
-        startForeground(NOTIFICATION_ID, notification(), ServiceInfo.FOREGROUND_SERVICE_TYPE_SPECIAL_USE)
+        startForeground(NOTIFICATION_ID, notification())
         sensorManager?.registerListener(this, sensor, SENSOR_DELAY)
     }
 
