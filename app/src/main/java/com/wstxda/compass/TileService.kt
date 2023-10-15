@@ -64,7 +64,9 @@ class TileService : android.service.quicksettings.TileService(), SensorEventList
     }
 
     override fun onStopListening() {
-        setInactive()
+        if (qsTile?.state == Tile.STATE_ACTIVE) {
+            setInactive()
+        }
     }
 
     override fun onClick() {
