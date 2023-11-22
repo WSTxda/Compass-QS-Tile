@@ -12,7 +12,9 @@ private const val CHANNEL_ID = "COMPASS_CHANNEL"
 const val NOTIFICATION_ID = 1
 
 fun TileService.channel() = NotificationChannel(
-    CHANNEL_ID, getString(R.string.channel_name), NotificationManager.IMPORTANCE_LOW
+    CHANNEL_ID,
+    getString(R.string.channel_name),
+    NotificationManager.IMPORTANCE_LOW
 )
 
 fun TileService.notification(): Notification =
@@ -21,6 +23,7 @@ fun TileService.notification(): Notification =
         .setContentText(getString(R.string.notification_label))
         .setContentIntent(notificationClickIntent()).build()
 
+
 fun TileService.notificationClickIntent(): PendingIntent {
     val intent = Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS).apply {
         putExtra(Settings.EXTRA_APP_PACKAGE, packageName)
@@ -28,6 +31,9 @@ fun TileService.notificationClickIntent(): PendingIntent {
         addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
     }
     return PendingIntent.getActivity(
-        this, 0, intent, PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+        this,
+        0,
+        intent,
+        PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT,
     )
 }

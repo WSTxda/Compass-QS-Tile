@@ -64,8 +64,8 @@ class TileService : android.service.quicksettings.TileService(), SensorEventList
     }
 
     override fun onStopListening() {
-        if (qsTile?.state == Tile.STATE_ACTIVE) {
-            setInactive()
+        when (qsTile?.state) {
+            Tile.STATE_ACTIVE -> stopCompass()
         }
     }
 
@@ -99,13 +99,11 @@ class TileService : android.service.quicksettings.TileService(), SensorEventList
     }
 
     private val NOTIFICATION_ID = 1
-
     private fun startCompass() {
         val notification = notification()
         startForeground(NOTIFICATION_ID, notification)
         sensorManager?.registerListener(this, sensor, SENSOR_DELAY)
     }
-
 
     private fun stopCompass() {
         Log.i(TAG, "Stop")

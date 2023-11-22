@@ -15,7 +15,8 @@ class IconFactory(context: Context, @DrawableRes drawableRes: Int) {
     // drawable and bitmap cache for better memory
     private val arrowDrawable = ContextCompat.getDrawable(context, drawableRes)!!
     private val iconBitmap = Bitmap.createBitmap(
-        arrowDrawable.intrinsicWidth, arrowDrawable.intrinsicHeight, Bitmap.Config.ARGB_8888
+        arrowDrawable.intrinsicWidth, arrowDrawable.intrinsicHeight,
+        Bitmap.Config.ARGB_8888
     )
 
     fun build(degrees: Float): Icon {
