@@ -2,8 +2,7 @@
 
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission
-        android:name="android.permission.POST_NOTIFICATIONS"
-        android:maxSdkVersion="33" />
+        android:name="android.permission.POST_NOTIFICATIONS" />
 
     <uses-feature
         android:name="android.hardware.sensor.accelerometer"

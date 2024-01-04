@@ -98,11 +98,9 @@ class TileService : android.service.quicksettings.TileService(), SensorEventList
         stopCompass()
     }
 
-    private val notificationId = 1
-
     private fun startCompass() {
-        val notification = notification()
-        startForeground(notificationId, notification)
+        Log.i(TAG, "Start")
+        startForeground(NOTIFICATION_ID, notification())
         sensorManager?.registerListener(this, sensor, SENSOR_DELAY)
     }
 
