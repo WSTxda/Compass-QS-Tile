@@ -9,8 +9,8 @@ android {
         applicationId 'com.wstxda.compass'
         minSdkVersion 26
         targetSdkVersion 33
-        versionCode 300
-        versionName "3.0"
+        versionCode 310
+        versionName "3.1"
     }
     buildTypes {
         release {
