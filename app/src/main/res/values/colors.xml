@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#0D47A1</color>
-    <color name="colorPrimaryDark">#002171</color>
-    <color name="colorAccent">@android:color/white</color>
+    <color name="ic_launcher_foreground_color">#FFFFFF</color>
+    <color name="ic_launcher_background">#1A73E8</color>
 </resources>
