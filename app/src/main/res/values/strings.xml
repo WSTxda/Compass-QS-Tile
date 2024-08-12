@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Compass Tile</string>
+    <string name="app_name">Compass QS Tile</string>
     <string name="channel_name">Compass</string>
     <string name="not_supported">Your device does not have a compass</string>
     <string name="tile_label">Compass</string>
