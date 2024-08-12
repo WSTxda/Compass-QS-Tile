@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Compass QS Tile</string>
-    <string name="channel_name">Kompass</string>
+    <string name="app_name">Kompass QS Tile</string>
+    <string name="channel_name">Service</string>
     <string name="not_supported">Dein Gerät hat keinen Kompass</string>
     <string name="tile_label">Kompass</string>
+    <string name="notification_title">Dienst läuft</string>
+    <string name="notification_label">Tippen Sie hier, um diese Benachrichtigung auszublenden</string>
     <string name="NE">NO</string>
     <string name="E">O</string>
     <string name="SE">SO</string>
