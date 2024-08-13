@@ -1,4 +1,4 @@
-package de.klimek.compass
+package com.wstxda.compass
 
 import android.app.NotificationManager
 import android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_MANIFEST
@@ -14,9 +14,9 @@ import android.util.Log
 import android.view.Display
 import android.widget.Toast
 import androidx.core.content.getSystemService
-import de.klimek.compass.tile.IconFactory
-import de.klimek.compass.tile.label
-import de.klimek.compass.tile.update
+import com.wstxda.compass.tile.IconFactory
+import com.wstxda.compass.tile.label
+import com.wstxda.compass.tile.update
 
 private const val TAG = "TileService"
 private const val SENSOR_DELAY = SensorManager.SENSOR_DELAY_UI

@@ -1,4 +1,4 @@
-package de.klimek.compass.tile
+package com.wstxda.compass.tile
 
 import android.service.quicksettings.Tile
 

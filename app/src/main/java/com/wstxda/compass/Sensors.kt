@@ -1,4 +1,4 @@
-package de.klimek.compass
+package com.wstxda.compass
 
 import android.hardware.SensorEvent
 import android.hardware.SensorManager

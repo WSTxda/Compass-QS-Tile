@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "de.klimek.compass"
+    namespace = "com.wstxda.compass"
     compileSdk = 34
 
     signingConfigs {
@@ -17,11 +17,12 @@ android {
     }
 
     defaultConfig {
-        applicationId = "de.klimek.compass"
+        applicationId = "com.wstxda.compass"
         minSdk = 26
+        //noinspection OldTargetApi
         targetSdk = 34
-        versionCode = 8
-        versionName = "1.4.1"
+        versionCode = 400
+        versionName = "4.0"
         proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
     }
     buildTypes {

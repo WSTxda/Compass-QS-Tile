@@ -1,4 +1,4 @@
-package de.klimek.compass
+package com.wstxda.compass
 
 import android.app.Notification
 import android.app.NotificationChannel

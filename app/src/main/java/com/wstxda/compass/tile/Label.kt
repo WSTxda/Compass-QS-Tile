@@ -1,7 +1,7 @@
-package de.klimek.compass.tile
+package com.wstxda.compass.tile
 
-import de.klimek.compass.R
-import de.klimek.compass.TileService
+import com.wstxda.compass.R
+import com.wstxda.compass.TileService
 import kotlin.math.roundToInt
 
 fun TileService.label(degrees: Float): String {
