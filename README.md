@@ -1,15 +1,19 @@
-<img src="./app/src/main/ic_launcher-playstore.png" alt="Logo" align="right" height="60" />
+# Compass Quick Settings Tile
 
-# CompassTile
+[![Platform](https://img.shields.io/badge/android-platform?style=for-the-badge&label=platform&labelColor=21262d&color=6e7681)](https://www.android.com) [![API](https://img.shields.io/badge/26%2B-level?style=for-the-badge&logo=android&logoColor=3cd382&label=API&labelColor=21262d&color=ff663b)](https://developer.android.com/studio/releases/platforms) [![Release](https://img.shields.io/github/v/release/WSTxda/Compass-QS-Tile?display_name=tag&style=for-the-badge&logo=github&labelColor=21262d&color=1f6feb)](https://github.com/WSTxda/Compass-QS-Tile/releases/latest) [![Downloads](https://img.shields.io/github/downloads/WSTxda/Compass-QS-Tile/total?style=for-the-badge&labelColor=21262d&color=238636)](https://github.com/WSTxda/Compass-QS-Tile/releases)
+ 
+![alt text](https://raw.githubusercontent.com/WSTxda/Compass-QS-Tile/main/images/Banner.svg)
 
-<a href="https://play.google.com/store/apps/details?id=de.klimek.compass"><img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" height="80"/></a>
+**Download**
 
-Compass as a tile for the Android quick settings menu. Based on a feature from an old version of [CyanogenMod](https://review.lineageos.org/c/LineageOS/android_frameworks_base/+/179168).
+[<img src="https://raw.githubusercontent.com/WSTxda/QP-Gallery-Releases/master/Images/GitHub.svg"
+	  alt='Get it on GitHub'
+	  height="80">](https://github.com/WSTxda/Compass-QS-Tile/releases/latest) [<img src="https://raw.githubusercontent.com/WSTxda/QP-Gallery-Releases/master/Images/Telegram.svg"
+	  alt='Get it on Telegram'
+	  height="80">](https://t.me/WSTprojects)
 
-<br>
+**About**
 
-<p align="center">
-<img src="https://github.com/Tetr4/CompassTile/assets/3826929/a615d23b-085f-4187-820e-af7ef60927fc" alt="compass tile" height="350" />
-&nbsp;
-<img src="https://github.com/Tetr4/CompassTile/assets/3826929/f2673fa6-28b9-47a4-850e-6a213bb6e846" alt="compass tile disabled" height="350" />
-</p>
+Compass as a tile for the Android quick settings painel, based on a feature from an old version of [CyanogenMod](https://review.lineageos.org/c/LineageOS/android_frameworks_base/+/179168)
+
+This fork contains only aesthetic changes, all credits related to functionality go to [Mike Klimek](https://github.com/Tetr4)
