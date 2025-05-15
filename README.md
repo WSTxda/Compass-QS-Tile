@@ -6,7 +6,7 @@
 
 **Download**
 
-[<img src="https://raw.githubusercontent.com/WSTxda/QP-Gallery-Releases/master/Images/GitHub.svg"
+[<img src="https://raw.githubusercontent.com/WSTxda/WSTxda/main/images/GitHub.svg"
 	  alt='Get it on GitHub'
 	  height="80">](https://github.com/WSTxda/Compass-QS-Tile/releases/latest)
 
