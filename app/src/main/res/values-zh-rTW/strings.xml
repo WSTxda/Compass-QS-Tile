@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">指南針快速方塊</string>
+    <string name="channel_name">服務</string>
+    <string name="not_supported">應用程式不支援您的裝置</string>
+    <string name="tile_label">指南針</string>
+    <string name="notification_title">服務正在執行</string>
+    <string name="notification_label">輕觸即可隱藏通知</string>
+    <string name="N">北</string>
+    <string name="NE">東北</string>
+    <string name="E">東</string>
+    <string name="SE">東南</string>
+    <string name="S">南</string>
+    <string name="SW">西南</string>
+    <string name="W">西</string>
+    <string name="NW">西北</string>
+</resources>
