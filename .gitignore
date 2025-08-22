@@ -1,20 +1,12 @@
-# Gradle
+*.iml
 .gradle
 /local.properties
-
-# Generated
-/build
-
-# IntelliJ
-*.iml
-.idea/*
-!.idea/codeStyles/
-!.idea/detekt.xml
-!.idea/icon.*
-!.idea/.name
-
-# Keystore
-*.jks
-
-# OSX filesystem
+/package.properties
+/.idea
+/.kotlin
 .DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties

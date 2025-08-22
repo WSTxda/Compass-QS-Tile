@@ -1,0 +1,11 @@
+[versions]
+agp = "8.12.1"
+kotlin = "2.2.10"
+appcompat = "1.7.1"
+
+[libraries]
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
