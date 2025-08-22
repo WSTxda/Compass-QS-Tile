@@ -14,6 +14,7 @@ import android.util.Log
 import android.view.Display
 import android.widget.Toast
 import androidx.core.content.getSystemService
+import com.wstxda.compass.tile.Haptics
 import com.wstxda.compass.tile.IconFactory
 import com.wstxda.compass.tile.label
 import com.wstxda.compass.tile.update
@@ -51,10 +52,12 @@ class TileService : android.service.quicksettings.TileService(), SensorEventList
         get() = displayManager?.getDisplay(Display.DEFAULT_DISPLAY)?.rotation
 
     private lateinit var iconFactory: IconFactory
+    private lateinit var haptics: Haptics
 
     override fun onCreate() {
         Log.i(TAG, "Create")
         iconFactory = IconFactory(applicationContext, R.drawable.ic_qs_compass_on)
+        haptics = Haptics(applicationContext)
         notificationManager?.createNotificationChannel(channel())
         if (START_FOREGROUND_IMMEDIATELY) {
             startForeground(NOTIFICATION_ID, notification(), FOREGROUND_SERVICE_TYPE_MANIFEST)
@@ -127,8 +130,16 @@ class TileService : android.service.quicksettings.TileService(), SensorEventList
 
     override fun onAccuracyChanged(sensor: Sensor, accuracy: Int) = Unit
 
+    private var lastDegrees: Float? = null
     override fun onSensorChanged(event: SensorEvent) {
         val degrees = event.getAzimuthDegrees(displayRotation)
+        if (lastDegrees == null) {
+            lastDegrees = degrees
+        } else if (kotlin.math.abs(degrees - lastDegrees!!) > 5) {
+            haptics.tick()
+            lastDegrees = degrees
+        }
+
         Log.v(TAG, degrees.toString())
         qsTile?.update {
             label = label(degrees)
