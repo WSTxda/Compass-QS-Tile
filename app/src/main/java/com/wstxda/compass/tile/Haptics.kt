@@ -4,6 +4,7 @@ import android.app.NotificationManager
 import android.content.Context
 import android.media.AudioManager
 import android.os.Build
+import android.os.PowerManager
 import android.os.VibrationEffect
 import android.os.Vibrator
 import android.os.VibratorManager
@@ -20,10 +21,10 @@ class Haptics(private val context: Context) {
 
     private val audioManager by lazy { context.getSystemService<AudioManager>()!! }
     private val notificationManager by lazy { context.getSystemService<NotificationManager>()!! }
+    private val powerManager by lazy { context.getSystemService<PowerManager>()!! }
 
     private val areHapticsEnabled: Boolean
         get() {
-            // Haptic feedback disabled globally
             @Suppress("DEPRECATION") if (Settings.System.getInt(
                     context.contentResolver, Settings.System.HAPTIC_FEEDBACK_ENABLED, 0
                 ) == 0
@@ -31,15 +32,15 @@ class Haptics(private val context: Context) {
                 return false
             }
 
-            // Ringer is silent
             if (audioManager.ringerMode == AudioManager.RINGER_MODE_SILENT) {
                 return false
             }
 
-            // DND is enabled and configured to suppress vibrations
             if (notificationManager.currentInterruptionFilter > NotificationManager.INTERRUPTION_FILTER_PRIORITY) {
                 return false
             }
+
+            if (powerManager.isPowerSaveMode) return false
 
             return true
         }
