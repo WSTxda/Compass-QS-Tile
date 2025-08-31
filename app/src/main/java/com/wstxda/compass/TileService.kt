@@ -1,14 +1,15 @@
 package com.wstxda.compass
 
+import android.app.ForegroundServiceStartNotAllowedException
 import android.app.NotificationManager
-import android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_MANIFEST
 import android.graphics.drawable.Icon
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.hardware.display.DisplayManager
-import android.os.Build
+import android.os.Build.VERSION
+import android.os.Build.VERSION_CODES
 import android.service.quicksettings.Tile
 import android.util.Log
 import android.view.Display
@@ -22,9 +23,16 @@ import com.wstxda.compass.tile.update
 private const val TAG = "TileService"
 private const val SENSOR_DELAY = SensorManager.SENSOR_DELAY_UI
 
+// Note: Sensor data is only accessible in foreground, so we need to start this service as a foreground service.
+// This is done either on onCreate, onClick or onStartListening, depending on Android version.
+
 // On Android 14 foreground service can not be started in onClick or onStartListening due to a bug:
 // https://issuetracker.google.com/issues/299506164
-private val START_FOREGROUND_IMMEDIATELY = Build.VERSION.SDK_INT == Build.VERSION_CODES.UPSIDE_DOWN_CAKE
+private val START_FOREGROUND_IMMEDIATELY = VERSION.SDK_INT == VERSION_CODES.UPSIDE_DOWN_CAKE
+
+// On Android 15+ foreground service can only be started after user interaction (onClick or sometimes onStartListening):
+// https://developer.android.com/about/versions/15/behavior-changes-15#fgs-hardening
+private val CAN_ONLY_START_FOREGROUND_ON_CLICK = VERSION.SDK_INT >= VERSION_CODES.VANILLA_ICE_CREAM
 
 class TileService : android.service.quicksettings.TileService(), SensorEventListener {
 
@@ -60,7 +68,7 @@ class TileService : android.service.quicksettings.TileService(), SensorEventList
         haptics = Haptics(applicationContext)
         notificationManager?.createNotificationChannel(channel())
         if (START_FOREGROUND_IMMEDIATELY) {
-            startForeground(NOTIFICATION_ID, notification(), FOREGROUND_SERVICE_TYPE_MANIFEST)
+            startForegroundCompat(NOTIFICATION_ID, notification())
         }
     }
 
@@ -71,12 +79,14 @@ class TileService : android.service.quicksettings.TileService(), SensorEventList
     }
 
     override fun onStartListening() {
+        Log.i(TAG, "Start listening")
         when (qsTile?.state) {
             Tile.STATE_ACTIVE -> startCompass()
         }
     }
 
     override fun onStopListening() {
+        Log.i(TAG, "Stop listening")
         when (qsTile?.state) {
             Tile.STATE_ACTIVE -> stopCompass()
         }
@@ -112,12 +122,20 @@ class TileService : android.service.quicksettings.TileService(), SensorEventList
     }
 
     private fun startCompass() {
-        Log.i(TAG, "Start")
-        // Sensor data is only accessible in foreground, so we need to start this service as a foreground service.
-        if (!START_FOREGROUND_IMMEDIATELY) {
-            startForeground(NOTIFICATION_ID, notification())
+        try {
+            Log.i(TAG, "Start")
+            if (!START_FOREGROUND_IMMEDIATELY) {
+                startForegroundCompat(NOTIFICATION_ID, notification())
+            }
+            sensorManager?.registerListener(this, sensor, SENSOR_DELAY)
+        } catch (e: Exception) {
+            if (CAN_ONLY_START_FOREGROUND_ON_CLICK && e is ForegroundServiceStartNotAllowedException) {
+                Log.w(TAG, "Foreground service start not allowed", e)
+                setInactive()
+            } else {
+                throw e // Crash on other exceptions
+            }
         }
-        sensorManager?.registerListener(this, sensor, SENSOR_DELAY)
     }
 
     private fun stopCompass() {
