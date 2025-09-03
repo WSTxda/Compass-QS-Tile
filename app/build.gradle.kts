@@ -11,8 +11,8 @@ android {
         applicationId = "com.wstxda.compass"
         minSdk = 26
         targetSdk = 36
-        versionCode = 410
-        versionName = "4.1"
+        versionCode = 420
+        versionName = "4.2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
