@@ -1,4 +1,4 @@
-package com.wstxda.compass
+package com.wstxda.toolkit.services
 
 import android.app.Notification
 import android.app.NotificationChannel
@@ -6,20 +6,19 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Intent
 import android.provider.Settings
+import android.service.quicksettings.TileService
 import androidx.core.app.NotificationCompat
+import com.wstxda.toolkit.R
 
-private const val CHANNEL_ID = "COMPASS_CHANNEL"
+private const val CHANNEL_ID = "TOOLKIT_CHANNEL"
 const val NOTIFICATION_ID = 1
 
 fun TileService.channel() = NotificationChannel(
-    CHANNEL_ID,
-    getString(R.string.channel_name),
-    NotificationManager.IMPORTANCE_LOW
+    CHANNEL_ID, getString(R.string.channel_name), NotificationManager.IMPORTANCE_LOW
 )
 
 fun TileService.notification(): Notification =
-    NotificationCompat.Builder(this, CHANNEL_ID)
-        .setSmallIcon(R.drawable.ic_notification)
+    NotificationCompat.Builder(this, CHANNEL_ID).setSmallIcon(R.drawable.ic_notification)
         .setContentTitle(getString(R.string.notification_title))
         .setContentText(getString(R.string.notification_label))
         .setContentIntent(notificationClickIntent()).build()

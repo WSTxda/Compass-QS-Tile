@@ -1,4 +1,4 @@
-package com.wstxda.compass
+package com.wstxda.toolkit
 
 import android.app.ForegroundServiceStartNotAllowedException
 import android.app.NotificationManager
@@ -7,20 +7,25 @@ import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
-import android.hardware.display.DisplayManager
 import android.os.Build.VERSION
 import android.os.Build.VERSION_CODES
 import android.service.quicksettings.Tile
 import android.util.Log
-import android.view.Display
 import android.widget.Toast
 import androidx.core.content.getSystemService
-import com.wstxda.compass.tile.Haptics
-import com.wstxda.compass.tile.IconFactory
-import com.wstxda.compass.tile.label
-import com.wstxda.compass.tile.update
+import com.wstxda.toolkit.services.NOTIFICATION_ID
+import com.wstxda.toolkit.services.channel
+import com.wstxda.toolkit.services.notification
+import com.wstxda.toolkit.services.sensors.Mode
+import com.wstxda.toolkit.services.sensors.getOrientation
+import com.wstxda.toolkit.services.sensors.getTilt
+import com.wstxda.toolkit.services.startForegroundCompat
+import com.wstxda.toolkit.tile.icon.LevelIconFactory
+import com.wstxda.toolkit.tile.update
+import com.wstxda.toolkit.utils.Haptics
+import kotlin.math.roundToInt
 
-private const val TAG = "TileService"
+private const val TAG = "LevelTileService"
 private const val SENSOR_DELAY = SensorManager.SENSOR_DELAY_UI
 
 // Note: Sensor data is only accessible in foreground, so we need to start this service as a foreground service.
@@ -34,38 +39,23 @@ private val START_FOREGROUND_IMMEDIATELY = VERSION.SDK_INT == VERSION_CODES.UPSI
 // https://developer.android.com/about/versions/15/behavior-changes-15#fgs-hardening
 private val CAN_ONLY_START_FOREGROUND_ON_CLICK = VERSION.SDK_INT >= VERSION_CODES.VANILLA_ICE_CREAM
 
-class TileService : android.service.quicksettings.TileService(), SensorEventListener {
+class LevelTileService : android.service.quicksettings.TileService(), SensorEventListener {
 
-    private val sensorManager
-        get() = getSystemService<SensorManager>()
+    private val sensorManager get() = getSystemService<SensorManager>()
+    private val notificationManager get() = getSystemService<NotificationManager>()
+    private val sensor by lazy { sensorManager?.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR) }
+    private val isSupported get() = sensor != null
 
-    private val notificationManager
-        get() = getSystemService<NotificationManager>()
-
-    private val displayManager
-        get() = getSystemService<DisplayManager>()
-
-    private val sensor by lazy {
-        // TYPE_ROTATION_VECTOR is a fusion of gyro, accelerometer and magnetometer, which is more
-        // accurate and responsive than just using the magnetometer.
-        // TYPE_GEOMAGNETIC_ROTATION_VECTOR is used as a fallback if gyro is not available.
-        sensorManager?.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR)
-            ?: sensorManager?.getDefaultSensor(Sensor.TYPE_GEOMAGNETIC_ROTATION_VECTOR)
-    }
-
-    private val isSupported
-        get() = sensor != null
-
-    private val displayRotation
-        get() = displayManager?.getDisplay(Display.DEFAULT_DISPLAY)?.rotation
-
-    private lateinit var iconFactory: IconFactory
     private lateinit var haptics: Haptics
+    private lateinit var icons: LevelIconFactory
+
+    private var lastHapticFeedback = 0L
+    private var lastDegrees: Int? = null
 
     override fun onCreate() {
         Log.i(TAG, "Create")
-        iconFactory = IconFactory(applicationContext, R.drawable.ic_qs_compass_on)
         haptics = Haptics(applicationContext)
+        icons = LevelIconFactory(applicationContext)
         notificationManager?.createNotificationChannel(channel())
         if (START_FOREGROUND_IMMEDIATELY) {
             startForegroundCompat(NOTIFICATION_ID, notification())
@@ -81,14 +71,14 @@ class TileService : android.service.quicksettings.TileService(), SensorEventList
     override fun onStartListening() {
         Log.i(TAG, "Start listening")
         when (qsTile?.state) {
-            Tile.STATE_ACTIVE -> startCompass()
+            Tile.STATE_ACTIVE -> startLevel()
         }
     }
 
     override fun onStopListening() {
         Log.i(TAG, "Stop listening")
         when (qsTile?.state) {
-            Tile.STATE_ACTIVE -> stopCompass()
+            Tile.STATE_ACTIVE -> stopLevel()
         }
     }
 
@@ -97,6 +87,10 @@ class TileService : android.service.quicksettings.TileService(), SensorEventList
     }
 
     private fun showNotSupported() {
+        qsTile?.apply {
+            state = Tile.STATE_UNAVAILABLE
+            updateTile()
+        }
         Toast.makeText(this, R.string.not_supported, Toast.LENGTH_LONG).show()
     }
 
@@ -109,19 +103,20 @@ class TileService : android.service.quicksettings.TileService(), SensorEventList
 
     private fun setActive() {
         qsTile?.update { state = Tile.STATE_ACTIVE }
-        startCompass()
+        startLevel()
     }
 
     private fun setInactive() {
         qsTile?.update {
             state = Tile.STATE_INACTIVE
-            icon = Icon.createWithResource(applicationContext, R.drawable.ic_qs_compass_off)
-            label = getString(R.string.tile_label)
+            icon = Icon.createWithResource(applicationContext, R.drawable.ic_level_off)
+            label = getString(R.string.level_tile_label)
         }
-        stopCompass()
+        stopLevel()
+        lastDegrees = null
     }
 
-    private fun startCompass() {
+    private fun startLevel() {
         try {
             Log.i(TAG, "Start")
             if (!START_FOREGROUND_IMMEDIATELY) {
@@ -130,7 +125,7 @@ class TileService : android.service.quicksettings.TileService(), SensorEventList
             sensorManager?.registerListener(this, sensor, SENSOR_DELAY)
         } catch (e: Exception) {
             if (CAN_ONLY_START_FOREGROUND_ON_CLICK && e is ForegroundServiceStartNotAllowedException) {
-                Log.w(TAG, "Foreground service start not allowed", e)
+                Log.w(TAG, "Foreground service not allowed", e)
                 setInactive()
             } else {
                 throw e // Crash on other exceptions
@@ -138,7 +133,7 @@ class TileService : android.service.quicksettings.TileService(), SensorEventList
         }
     }
 
-    private fun stopCompass() {
+    private fun stopLevel() {
         Log.i(TAG, "Stop")
         if (!START_FOREGROUND_IMMEDIATELY) {
             stopForeground(STOP_FOREGROUND_DETACH)
@@ -148,20 +143,43 @@ class TileService : android.service.quicksettings.TileService(), SensorEventList
 
     override fun onAccuracyChanged(sensor: Sensor, accuracy: Int) = Unit
 
-    private var lastDegrees: Float? = null
     override fun onSensorChanged(event: SensorEvent) {
-        val degrees = event.getAzimuthDegrees(displayRotation)
-        if (lastDegrees == null) {
-            lastDegrees = degrees
-        } else if (kotlin.math.abs(degrees - lastDegrees!!) > 5) {
-            haptics.tick()
-            lastDegrees = degrees
+        val (pitch, roll, balance, mode) = getOrientation(this, event)
+        val degrees = when (mode) {
+            Mode.Line -> balance.roundToInt()
+            Mode.Dot -> getTilt(pitch, roll)
         }
 
-        Log.v(TAG, degrees.toString())
+        if (lastDegrees != null && lastDegrees == degrees) return
+        lastDegrees = degrees
+
         qsTile?.update {
-            label = label(degrees)
-            icon = iconFactory.build(degrees)
+            if (degrees == 0) {
+                // Perfectly level
+                icon = Icon.createWithResource(
+                    applicationContext, when (mode) {
+                        Mode.Line -> R.drawable.ic_level_line_zero
+                        Mode.Dot -> R.drawable.ic_level_dot_zero
+                    }
+                )
+                label = getString(R.string.level_tile_zero_degrees)
+                vibrateOnZero()
+            } else {
+                // Not level
+                icon = when (mode) {
+                    Mode.Line -> icons.buildLine(balance)
+                    Mode.Dot -> icons.buildDot(pitch, roll)
+                }
+                label = getString(R.string.level_tile_label_degrees, degrees)
+            }
+        }
+    }
+
+    private fun vibrateOnZero() {
+        val now = System.currentTimeMillis()
+        if (now - lastHapticFeedback > 500) {
+            haptics.tick()
+            lastHapticFeedback = now
         }
     }
 }

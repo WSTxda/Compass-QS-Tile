@@ -1,11 +1,24 @@
 <resources>
-    <string name="app_name">Compass QS Tile</string>
+
+    <!--app names-->
+
+    <string name="app_name">Toolkit Tiles</string>
+
+    <!--notification service-->
+
     <string name="channel_name">Service</string>
-    <string name="not_supported">Your device does not support this app</string>
-    <string name="tile_label">Compass</string>
     <string name="notification_title">Service is running</string>
     <string name="notification_label">Tap here to hide this notification</string>
-    <string name="tile_label_degrees" translatable="false">%1$d° %2$s</string>
+
+    <!--messages-->
+
+    <string name="not_supported">Your device does not support this app</string>
+
+    <!--compass tile-->
+
+    <string name="compass_tile_label">Compass</string>
+    <!--tile label-->
+    <string name="compass_tile_label_degrees" translatable="false">%1$d° %2$s</string>
     <string name="N">N</string>
     <string name="NE">NE</string>
     <string name="E">E</string>
@@ -14,4 +27,11 @@
     <string name="SW">SW</string>
     <string name="W">W</string>
     <string name="NW">NW</string>
+
+    <!--bubble level tile-->
+
+    <string name="level_tile_label">Level</string>
+    <!--tile label-->
+    <string name="level_tile_zero_degrees" translatable="false">0°</string>
+    <string name="level_tile_label_degrees" translatable="false">%d°</string>
 </resources>

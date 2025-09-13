@@ -1,9 +1,10 @@
-package com.wstxda.compass
+package com.wstxda.toolkit.services
 
 import android.app.Notification
 import android.content.pm.ServiceInfo.FOREGROUND_SERVICE_TYPE_MANIFEST
 import android.os.Build.VERSION
 import android.os.Build.VERSION_CODES
+import android.service.quicksettings.TileService
 import androidx.core.app.ServiceCompat
 
 fun TileService.startForegroundCompat(notificationId: Int, notification: Notification) {

@@ -21,5 +21,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Compass"
+rootProject.name = "Toolkit Tiles"
 include(":app")

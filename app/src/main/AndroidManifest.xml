@@ -1,6 +1,9 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission
+        android:name="android.permission.FOREGROUND_SERVICE"
+        tools:ignore="ForegroundServicesPolicy" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_SPECIAL_USE" />
     <uses-permission android:name="android.permission.VIBRATE" />
 
@@ -22,25 +25,44 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <!--compass quick settings tile service-->
+
         <service
-            android:name=".TileService"
+            android:name=".CompassTileService"
             android:exported="true"
             android:foregroundServiceType="specialUse"
-            android:icon="@drawable/ic_qs_compass_off"
-            android:label="@string/tile_label"
+            android:icon="@drawable/ic_compass_off"
+            android:label="@string/compass_tile_label"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
-
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
             </intent-filter>
-
             <meta-data
                 android:name="android.service.quicksettings.TOGGLEABLE_TILE"
                 android:value="true" />
-
             <property
                 android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
                 android:value="Required for accessing compass sensor data while tile is active" />
+        </service>
+
+        <!--bubble level quick settings tile service-->
+
+        <service
+            android:name=".LevelTileService"
+            android:exported="true"
+            android:foregroundServiceType="specialUse"
+            android:icon="@drawable/ic_level_off"
+            android:label="@string/level_tile_label"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.service.quicksettings.TOGGLEABLE_TILE"
+                android:value="true" />
+            <property
+                android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
+                android:value="Required for accessing accelerometer sensor data while tile is active" />
         </service>
     </application>
 </manifest>

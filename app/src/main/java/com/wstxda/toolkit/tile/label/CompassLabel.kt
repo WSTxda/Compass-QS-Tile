@@ -1,10 +1,10 @@
-package com.wstxda.compass.tile
+package com.wstxda.toolkit.tile.label
 
-import com.wstxda.compass.R
-import com.wstxda.compass.TileService
+import com.wstxda.toolkit.CompassTileService
+import com.wstxda.toolkit.R
 import kotlin.math.roundToInt
 
-fun TileService.label(degrees: Float): String {
+fun CompassTileService.label(degrees: Float): String {
     val direction = when (degrees) {
         in 0.0..22.5, in 337.5..360.0 -> getString(R.string.N)
         in 22.5..67.5 -> getString(R.string.NE)
@@ -14,8 +14,8 @@ fun TileService.label(degrees: Float): String {
         in 202.5..247.5 -> getString(R.string.SW)
         in 247.5..292.5 -> getString(R.string.W)
         in 292.5..337.5 -> getString(R.string.NW)
-        else -> "" // should never happen
+        else -> "" // Should never happen
     }
     val degreesRounded = degrees.roundToInt() % 360
-    return getString(R.string.tile_label_degrees, degreesRounded, direction)
+    return getString(R.string.compass_tile_label_degrees, degreesRounded, direction)
 }

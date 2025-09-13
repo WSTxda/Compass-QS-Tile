@@ -1,4 +1,7 @@
 <resources>
-    <color name="ic_launcher_foreground_color">@android:color/system_neutral2_700</color>
+
+    <!--app icon-->
+
+    <color name="ic_launcher_foreground">@android:color/system_neutral2_700</color>
     <color name="ic_launcher_background">@android:color/system_accent1_100</color>
 </resources>

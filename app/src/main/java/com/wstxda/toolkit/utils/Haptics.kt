@@ -1,4 +1,4 @@
-package com.wstxda.compass.tile
+package com.wstxda.toolkit.utils
 
 import android.app.NotificationManager
 import android.content.Context

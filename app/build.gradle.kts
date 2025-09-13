@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.wstxda.compass"
+    namespace = "com.wstxda.toolkit"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.wstxda.compass"
+        applicationId = "com.wstxda.toolkit"
         minSdk = 26
         targetSdk = 36
         versionCode = 420

@@ -1,4 +1,4 @@
-package com.wstxda.compass
+package com.wstxda.toolkit.services.sensors
 
 import android.hardware.SensorEvent
 import android.hardware.SensorManager
@@ -7,14 +7,15 @@ import android.view.Surface.ROTATION_180
 import android.view.Surface.ROTATION_270
 import android.view.Surface.ROTATION_90
 
+private fun Double.normalizeDegrees() = ((this + 360) % 360).toFloat()
+
 fun SensorEvent.getAzimuthDegrees(displayRotation: Int?): Float {
     val rotationMatrix = FloatArray(9).also {
         SensorManager.getRotationMatrixFromVector(it, this.values)
     }
-    val orientation = FloatArray(3).also {
-        SensorManager.getOrientation(rotationMatrix, it)
-    }
-    val azimuthRadians = orientation.getOrElse(0) { 0f }
+    val orientation = FloatArray(3)
+    SensorManager.getOrientation(rotationMatrix, orientation)
+    val azimuthRadians = orientation[0]
     val azimuthDegrees = Math.toDegrees(azimuthRadians.toDouble())
     val displayAdjustedDegrees = when (displayRotation) {
         ROTATION_0 -> azimuthDegrees
@@ -25,5 +26,3 @@ fun SensorEvent.getAzimuthDegrees(displayRotation: Int?): Float {
     }
     return displayAdjustedDegrees.normalizeDegrees()
 }
-
-private fun Double.normalizeDegrees() = ((this + 360) % 360).toFloat()

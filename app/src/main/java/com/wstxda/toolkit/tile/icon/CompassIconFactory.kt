@@ -1,4 +1,4 @@
-package com.wstxda.compass.tile
+package com.wstxda.toolkit.tile.icon
 
 import android.content.Context
 import android.graphics.Canvas
@@ -10,11 +10,12 @@ import androidx.core.content.ContextCompat
 import androidx.core.graphics.createBitmap
 
 /** Factory for creating (and caching) rotated icons. */
-class IconFactory(context: Context, @DrawableRes drawableRes: Int) {
+class CompassIconFactory(context: Context, @DrawableRes drawableRes: Int) {
 
-    // drawable and bitmap cache for better memory
+    // Drawable and bitmap cache for better memory
     private val arrowDrawable = ContextCompat.getDrawable(context, drawableRes)!!
-    private val iconBitmap = createBitmap(arrowDrawable.intrinsicWidth, arrowDrawable.intrinsicHeight)
+    private val iconBitmap =
+        createBitmap(arrowDrawable.intrinsicWidth, arrowDrawable.intrinsicHeight)
 
     fun build(degrees: Float): Icon {
         Canvas(iconBitmap).apply {

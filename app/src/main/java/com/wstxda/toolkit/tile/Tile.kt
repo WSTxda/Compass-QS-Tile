@@ -1,4 +1,4 @@
-package com.wstxda.compass.tile
+package com.wstxda.toolkit.tile
 
 import android.service.quicksettings.Tile
 

@@ -1,4 +1,6 @@
 <resources>
 
+    <!--app theme-->
+
     <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar" />
 </resources>
