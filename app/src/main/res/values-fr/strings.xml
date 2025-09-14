@@ -1,12 +1,12 @@
 <resources>
 
     <!--app names-->
-    <string name="app_name">Tuiles d'Outils</string>
+    <string name="app_name">Tuiles d\'Outils</string>
 
     <!--notification service-->
 
     <string name="channel_name">Service</string>
-    <string name="notification_title">Le service est en cours d'exécution</string>
+    <string name="notification_title">Le service est en cours d\'exécution</string>
     <string name="notification_label">Appuyez ici pour masquer cette notification</string>
 
     <!--messages-->
