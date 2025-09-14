@@ -1,0 +1,7 @@
+<resources>
+
+    <!--app icon-->
+
+    <color name="ic_launcher_foreground">#E7E4BF</color>
+    <color name="ic_launcher_background">#49482D</color>
+</resources>
