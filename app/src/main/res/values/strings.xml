@@ -12,7 +12,7 @@
 
     <!--messages-->
 
-    <string name="not_supported">Your device does not support this app</string>
+    <string name="not_supported">Your device does not support this feature</string>
 
     <!--compass tile-->
 
