@@ -1,13 +1,12 @@
 <resources>
 
     <!--app names-->
-
     <string name="app_name">Blocos de Ferramentas</string>
 
     <!--notification service-->
 
     <string name="channel_name">Serviço</string>
-    <string name="notification_title">Serviço está ativo</string>
+    <string name="notification_title">O serviço está em execução</string>
     <string name="notification_label">Toque aqui para ocultar esta notificação</string>
 
     <!--messages-->

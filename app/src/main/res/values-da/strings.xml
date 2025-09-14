@@ -1,0 +1,32 @@
+<resources>
+
+    <!--app names-->
+    <string name="app_name">Værktøjsfliser</string>
+
+    <!--notification service-->
+
+    <string name="channel_name">Tjeneste</string>
+    <string name="notification_title">Tjenesten kører</string>
+    <string name="notification_label">Tryk her for at skjule denne besked</string>
+
+    <!--messages-->
+
+    <string name="not_supported">Din enhed understøtter ikke denne funktion</string>
+
+    <!--compass tile-->
+
+    <string name="compass_tile_label">Kompas</string>
+    <!--tile label-->
+    <string name="N">N</string>
+    <string name="NE">NØ</string>
+    <string name="E">Ø</string>
+    <string name="SE">SØ</string>
+    <string name="S">S</string>
+    <string name="SW">SV</string>
+    <string name="W">V</string>
+    <string name="NW">NV</string>
+
+    <!--bubble level tile-->
+
+    <string name="level_tile_label">Vaterpas</string>
+</resources>

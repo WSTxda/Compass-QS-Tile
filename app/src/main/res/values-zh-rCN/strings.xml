@@ -1,0 +1,32 @@
+<resources>
+
+    <!--app names-->
+    <string name="app_name">工具磁贴</string>
+
+    <!--notification service-->
+
+    <string name="channel_name">服务</string>
+    <string name="notification_title">服务正在运行</string>
+    <string name="notification_label">点击此处隐藏此通知</string>
+
+    <!--messages-->
+
+    <string name="not_supported">您的设备不支持此功能</string>
+
+    <!--compass tile-->
+
+    <string name="compass_tile_label">指南针</string>
+    <!--tile label-->
+    <string name="N">北</string>
+    <string name="NE">东北</string>
+    <string name="E">东</string>
+    <string name="SE">东南</string>
+    <string name="S">南</string>
+    <string name="SW">西南</string>
+    <string name="W">西</string>
+    <string name="NW">西北</string>
+
+    <!--bubble level tile-->
+
+    <string name="level_tile_label">水平仪</string>
+</resources>

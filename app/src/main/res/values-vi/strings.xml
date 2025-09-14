@@ -1,0 +1,32 @@
+<resources>
+
+    <!--app names-->
+    <string name="app_name">Gạch Công Cụ</string>
+
+    <!--notification service-->
+
+    <string name="channel_name">Dịch vụ</string>
+    <string name="notification_title">Dịch vụ đang chạy</string>
+    <string name="notification_label">Chạm vào đây để ẩn thông báo này</string>
+
+    <!--messages-->
+
+    <string name="not_supported">Thiết bị của bạn không hỗ trợ tính năng này</string>
+
+    <!--compass tile-->
+
+    <string name="compass_tile_label">La bàn</string>
+    <!--tile label-->
+    <string name="N">B</string>
+    <string name="NE">ĐB</string>
+    <string name="E">Đ</string>
+    <string name="SE">ĐN</string>
+    <string name="S">N</string>
+    <string name="SW">TN</string>
+    <string name="W">T</string>
+    <string name="NW">TB</string>
+
+    <!--bubble level tile-->
+
+    <string name="level_tile_label">Thước thủy</string>
+</resources>

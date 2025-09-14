@@ -1,0 +1,32 @@
+<resources>
+
+    <!--app names-->
+    <string name="app_name">Плитки Інструментів</string>
+
+    <!--notification service-->
+
+    <string name="channel_name">Служба</string>
+    <string name="notification_title">Служба запущена</string>
+    <string name="notification_label">Торкніться тут, щоб приховати це сповіщення</string>
+
+    <!--messages-->
+
+    <string name="not_supported">Ваш пристрій не підтримує цю функцію</string>
+
+    <!--compass tile-->
+
+    <string name="compass_tile_label">Компас</string>
+    <!--tile label-->
+    <string name="N">Пн</string>
+    <string name="NE">ПнС</string>
+    <string name="E">С</string>
+    <string name="SE">ПдС</string>
+    <string name="S">Пд</string>
+    <string name="SW">ПдЗ</string>
+    <string name="W">З</string>
+    <string name="NW">ПнЗ</string>
+
+    <!--bubble level tile-->
+
+    <string name="level_tile_label">Рівень</string>
+</resources>

@@ -1,0 +1,32 @@
+<resources>
+
+    <!--app names-->
+    <string name="app_name">टूल टाइल्स</string>
+
+    <!--notification service-->
+
+    <string name="channel_name">सेवा</string>
+    <string name="notification_title">सेवा चल रही है</string>
+    <string name="notification_label">इस अधिसूचना को छिपाने के लिए यहाँ टैप करें</string>
+
+    <!--messages-->
+
+    <string name="not_supported">आपका डिवाइस इस सुविधा का समर्थन नहीं करता</string>
+
+    <!--compass tile-->
+
+    <string name="compass_tile_label">कंपास</string>
+    <!--tile label-->
+    <string name="N">उ</string>
+    <string name="NE">उपू</string>
+    <string name="E">पू</string>
+    <string name="SE">दपू</string>
+    <string name="S">द</string>
+    <string name="SW">दप</string>
+    <string name="W">प</string>
+    <string name="NW">उप</string>
+
+    <!--bubble level tile-->
+
+    <string name="level_tile_label">लेवल</string>
+</resources>

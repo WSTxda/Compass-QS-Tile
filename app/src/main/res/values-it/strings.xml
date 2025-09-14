@@ -1,0 +1,32 @@
+<resources>
+
+    <!--app names-->
+    <string name="app_name">Tile di Strumenti</string>
+
+    <!--notification service-->
+
+    <string name="channel_name">Servizio</string>
+    <string name="notification_title">Il servizio è in esecuzione</string>
+    <string name="notification_label">Tocca qui per nascondere questa notifica</string>
+
+    <!--messages-->
+
+    <string name="not_supported">Il tuo dispositivo non supporta questa funzione</string>
+
+    <!--compass tile-->
+
+    <string name="compass_tile_label">Bussola</string>
+    <!--tile label-->
+    <string name="N">N</string>
+    <string name="NE">NE</string>
+    <string name="E">E</string>
+    <string name="SE">SE</string>
+    <string name="S">S</string>
+    <string name="SW">SO</string>
+    <string name="W">O</string>
+    <string name="NW">NO</string>
+
+    <!--bubble level tile-->
+
+    <string name="level_tile_label">Livella</string>
+</resources>

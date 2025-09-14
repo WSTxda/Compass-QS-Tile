@@ -1,7 +1,6 @@
 <resources>
 
     <!--app names-->
-
     <string name="app_name">Toolkit Tiles</string>
 
     <!--notification service-->

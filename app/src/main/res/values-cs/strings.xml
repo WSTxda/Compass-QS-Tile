@@ -1,0 +1,32 @@
+<resources>
+
+    <!--app names-->
+    <string name="app_name">Dlaždice Nástrojů</string>
+
+    <!--notification service-->
+
+    <string name="channel_name">Služba</string>
+    <string name="notification_title">Služba je spuštěna</string>
+    <string name="notification_label">Klepnutím sem skryjte toto oznámení</string>
+
+    <!--messages-->
+
+    <string name="not_supported">Vaše zařízení nepodporuje tuto funkci</string>
+
+    <!--compass tile-->
+
+    <string name="compass_tile_label">Kompas</string>
+    <!--tile label-->
+    <string name="N">S</string>
+    <string name="NE">SV</string>
+    <string name="E">V</string>
+    <string name="SE">JV</string>
+    <string name="S">J</string>
+    <string name="SW">JZ</string>
+    <string name="W">Z</string>
+    <string name="NW">SZ</string>
+
+    <!--bubble level tile-->
+
+    <string name="level_tile_label">Vodováha</string>
+</resources>

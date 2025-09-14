@@ -1,0 +1,32 @@
+<resources>
+
+    <!--app names-->
+    <string name="app_name">แท้ป เครื่องมือ</string>
+
+    <!--notification service-->
+
+    <string name="channel_name">บริการ</string>
+    <string name="notification_title">บริการกำลังทำงาน</string>
+    <string name="notification_label">แตะที่นี่เพื่อซ่อนการแจ้งเตือนนี้</string>
+
+    <!--messages-->
+
+    <string name="not_supported">อุปกรณ์ของคุณไม่รองรับคุณลักษณะนี้</string>
+
+    <!--compass tile-->
+
+    <string name="compass_tile_label">เข็มทิศ</string>
+    <!--tile label-->
+    <string name="N">เหนือ</string>
+    <string name="NE">ตอ.เหนือ</string>
+    <string name="E">ตะวันออก</string>
+    <string name="SE">ตอ.ใต้</string>
+    <string name="S">ใต้</string>
+    <string name="SW">ตก.ใต้</string>
+    <string name="W">ตะวันตก</string>
+    <string name="NW">ตก.เหนือ</string>
+
+    <!--bubble level tile-->
+
+    <string name="level_tile_label">ระดับน้ำ</string>
+</resources>

@@ -1,0 +1,32 @@
+<resources>
+
+    <!--app names-->
+    <string name="app_name">Työkalulaatat</string>
+
+    <!--notification service-->
+
+    <string name="channel_name">Palvelu</string>
+    <string name="notification_title">Palvelu on käynnissä</string>
+    <string name="notification_label">Napauta tästä piilottaaksesi tämän ilmoituksen</string>
+
+    <!--messages-->
+
+    <string name="not_supported">Laitteesi ei tue tätä toimintoa</string>
+
+    <!--compass tile-->
+
+    <string name="compass_tile_label">Kompassi</string>
+    <!--tile label-->
+    <string name="N">P</string>
+    <string name="NE">KL</string>
+    <string name="E">I</string>
+    <string name="SE">KA</string>
+    <string name="S">E</string>
+    <string name="SW">LO</string>
+    <string name="W">L</string>
+    <string name="NW">LU</string>
+
+    <!--bubble level tile-->
+
+    <string name="level_tile_label">Vesivaaka</string>
+</resources>

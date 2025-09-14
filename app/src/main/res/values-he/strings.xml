@@ -1,0 +1,32 @@
+<resources>
+
+    <!--app names-->
+    <string name="app_name">אריחי כלים</string>
+
+    <!--notification service-->
+
+    <string name="channel_name">שירות</string>
+    <string name="notification_title">השירות פועל</string>
+    <string name="notification_label">הקש כאן כדי להסתיר התראה זו</string>
+
+    <!--messages-->
+
+    <string name="not_supported">המכשיר שלך אינו תומך בתכונה זו</string>
+
+    <!--compass tile-->
+
+    <string name="compass_tile_label">מצפן</string>
+    <!--tile label-->
+    <string name="N">צ</string>
+    <string name="NE">צמ</string>
+    <string name="E">מ</string>
+    <string name="SE">דמ</string>
+    <string name="S">ד</string>
+    <string name="SW">דמע</string>
+    <string name="W">מע</string>
+    <string name="NW">צמע</string>
+
+    <!--bubble level tile-->
+
+    <string name="level_tile_label">פלס</string>
+</resources>

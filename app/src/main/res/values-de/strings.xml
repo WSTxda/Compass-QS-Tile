@@ -1,0 +1,32 @@
+<resources>
+
+    <!--app names-->
+    <string name="app_name">Werkzeug-Kacheln</string>
+
+    <!--notification service-->
+
+    <string name="channel_name">Dienst</string>
+    <string name="notification_title">Dienst läuft</string>
+    <string name="notification_label">Hier tippen, um diese Benachrichtigung auszublenden</string>
+
+    <!--messages-->
+
+    <string name="not_supported">Ihr Gerät unterstützt diese Funktion nicht</string>
+
+    <!--compass tile-->
+
+    <string name="compass_tile_label">Kompass</string>
+    <!--tile label-->
+    <string name="N">N</string>
+    <string name="NE">NO</string>
+    <string name="E">O</string>
+    <string name="SE">SO</string>
+    <string name="S">S</string>
+    <string name="SW">SW</string>
+    <string name="W">W</string>
+    <string name="NW">NW</string>
+
+    <!--bubble level tile-->
+
+    <string name="level_tile_label">Wasserwaage</string>
+</resources>

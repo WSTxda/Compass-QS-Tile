@@ -1,0 +1,32 @@
+<resources>
+
+    <!--app names-->
+    <string name="app_name">Ubin Alat</string>
+
+    <!--notification service-->
+
+    <string name="channel_name">Layanan</string>
+    <string name="notification_title">Layanan sedang berjalan</string>
+    <string name="notification_label">Ketuk di sini untuk menyembunyikan notifikasi ini</string>
+
+    <!--messages-->
+
+    <string name="not_supported">Perangkat Anda tidak mendukung fitur ini</string>
+
+    <!--compass tile-->
+
+    <string name="compass_tile_label">Kompas</string>
+    <!--tile label-->
+    <string name="N">U</string>
+    <string name="NE">TL</string>
+    <string name="E">T</string>
+    <string name="SE">TG</string>
+    <string name="S">S</string>
+    <string name="SW">BD</string>
+    <string name="W">B</string>
+    <string name="NW">BL</string>
+
+    <!--bubble level tile-->
+
+    <string name="level_tile_label">Waterpass</string>
+</resources>
