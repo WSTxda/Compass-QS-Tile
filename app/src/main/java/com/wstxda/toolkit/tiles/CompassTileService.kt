@@ -1,4 +1,4 @@
-package com.wstxda.toolkit
+package com.wstxda.toolkit.tiles
 
 import android.app.ForegroundServiceStartNotAllowedException
 import android.app.NotificationManager
@@ -11,19 +11,22 @@ import android.hardware.display.DisplayManager
 import android.os.Build.VERSION
 import android.os.Build.VERSION_CODES
 import android.service.quicksettings.Tile
+import android.service.quicksettings.TileService
 import android.util.Log
 import android.view.Display
 import android.widget.Toast
 import androidx.core.content.getSystemService
+import com.wstxda.toolkit.R
+import com.wstxda.toolkit.services.sensors.getAzimuthDegrees
+import com.wstxda.toolkit.resources.icon.CompassIconFactory
+import com.wstxda.toolkit.resources.label.label
 import com.wstxda.toolkit.services.NOTIFICATION_ID
 import com.wstxda.toolkit.services.channel
 import com.wstxda.toolkit.services.notification
-import com.wstxda.toolkit.services.sensors.getAzimuthDegrees
 import com.wstxda.toolkit.services.startForegroundCompat
-import com.wstxda.toolkit.tile.icon.CompassIconFactory
-import com.wstxda.toolkit.tile.label.label
-import com.wstxda.toolkit.tile.update
+import com.wstxda.toolkit.update
 import com.wstxda.toolkit.utils.Haptics
+import kotlin.math.abs
 
 private const val TAG = "CompassTileService"
 private const val SENSOR_DELAY = SensorManager.SENSOR_DELAY_UI
@@ -39,7 +42,7 @@ private val START_FOREGROUND_IMMEDIATELY = VERSION.SDK_INT == VERSION_CODES.UPSI
 // https://developer.android.com/about/versions/15/behavior-changes-15#fgs-hardening
 private val CAN_ONLY_START_FOREGROUND_ON_CLICK = VERSION.SDK_INT >= VERSION_CODES.VANILLA_ICE_CREAM
 
-class CompassTileService : android.service.quicksettings.TileService(), SensorEventListener {
+class CompassTileService : TileService(), SensorEventListener {
 
     private val sensorManager
         get() = getSystemService<SensorManager>()
@@ -158,7 +161,7 @@ class CompassTileService : android.service.quicksettings.TileService(), SensorEv
         val degrees = event.getAzimuthDegrees(displayRotation)
         if (lastDegrees == null) {
             lastDegrees = degrees
-        } else if (kotlin.math.abs(degrees - lastDegrees!!) > 5) {
+        } else if (abs(degrees - lastDegrees!!) > 5) {
             haptics.tick()
             lastDegrees = degrees
         }

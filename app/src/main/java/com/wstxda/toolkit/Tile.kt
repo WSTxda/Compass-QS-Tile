@@ -1,4 +1,4 @@
-package com.wstxda.toolkit.tile
+package com.wstxda.toolkit
 
 import android.service.quicksettings.Tile
 

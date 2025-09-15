@@ -1,4 +1,4 @@
-package com.wstxda.toolkit.tile.icon
+package com.wstxda.toolkit.resources.icon
 
 import android.content.Context
 import android.graphics.Canvas

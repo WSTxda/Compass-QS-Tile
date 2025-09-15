@@ -1,6 +1,6 @@
-package com.wstxda.toolkit.tile.label
+package com.wstxda.toolkit.resources.label
 
-import com.wstxda.toolkit.CompassTileService
+import com.wstxda.toolkit.tiles.CompassTileService
 import com.wstxda.toolkit.R
 import kotlin.math.roundToInt
 

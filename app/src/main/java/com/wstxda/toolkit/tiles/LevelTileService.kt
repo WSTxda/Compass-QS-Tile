@@ -1,4 +1,4 @@
-package com.wstxda.toolkit
+package com.wstxda.toolkit.tiles
 
 import android.app.ForegroundServiceStartNotAllowedException
 import android.app.NotificationManager
@@ -10,18 +10,20 @@ import android.hardware.SensorManager
 import android.os.Build.VERSION
 import android.os.Build.VERSION_CODES
 import android.service.quicksettings.Tile
+import android.service.quicksettings.TileService
 import android.util.Log
 import android.widget.Toast
 import androidx.core.content.getSystemService
-import com.wstxda.toolkit.services.NOTIFICATION_ID
-import com.wstxda.toolkit.services.channel
-import com.wstxda.toolkit.services.notification
+import com.wstxda.toolkit.R
 import com.wstxda.toolkit.services.sensors.Mode
 import com.wstxda.toolkit.services.sensors.getOrientation
 import com.wstxda.toolkit.services.sensors.getTilt
+import com.wstxda.toolkit.resources.icon.LevelIconFactory
+import com.wstxda.toolkit.services.NOTIFICATION_ID
+import com.wstxda.toolkit.services.channel
+import com.wstxda.toolkit.services.notification
 import com.wstxda.toolkit.services.startForegroundCompat
-import com.wstxda.toolkit.tile.icon.LevelIconFactory
-import com.wstxda.toolkit.tile.update
+import com.wstxda.toolkit.update
 import com.wstxda.toolkit.utils.Haptics
 import kotlin.math.roundToInt
 
@@ -39,7 +41,7 @@ private val START_FOREGROUND_IMMEDIATELY = VERSION.SDK_INT == VERSION_CODES.UPSI
 // https://developer.android.com/about/versions/15/behavior-changes-15#fgs-hardening
 private val CAN_ONLY_START_FOREGROUND_ON_CLICK = VERSION.SDK_INT >= VERSION_CODES.VANILLA_ICE_CREAM
 
-class LevelTileService : android.service.quicksettings.TileService(), SensorEventListener {
+class LevelTileService : TileService(), SensorEventListener {
 
     private val sensorManager get() = getSystemService<SensorManager>()
     private val notificationManager get() = getSystemService<NotificationManager>()
