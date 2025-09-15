@@ -25,6 +25,26 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <!--accessibility service/activity for lock screen tile-->
+
+        <activity
+            android:name=".activity.AccessibilityPermission"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:exported="false" />
+
+        <service
+            android:name=".services.accessibility.LockAccessibilityService"
+            android:exported="true"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE"
+            tools:ignore="AccessibilityPolicy">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService" />
+            </intent-filter>
+            <meta-data
+                android:name="android.accessibilityservice"
+                android:resource="@xml/accessibility_service_config" />
+        </service>
+
         <!--compass quick settings tile service-->
 
         <service
@@ -63,6 +83,20 @@
             <property
                 android:name="android.app.PROPERTY_SPECIAL_USE_FGS_SUBTYPE"
                 android:value="Required for accessing accelerometer sensor data while tile is active" />
+        </service>
+
+        <!--lock screen quick settings tile service-->
+
+        <service
+            android:name=".tiles.LockTileService"
+            android:enabled="@bool/enable_lock_tile"
+            android:exported="true"
+            android:icon="@drawable/ic_lock"
+            android:label="@string/lock_tile_label"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
         </service>
     </application>
 </manifest>

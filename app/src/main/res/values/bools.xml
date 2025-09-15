@@ -1,0 +1,4 @@
+<resources>
+
+    <bool name="enable_lock_tile">false</bool>
+</resources>
