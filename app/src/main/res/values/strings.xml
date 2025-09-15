@@ -42,4 +42,11 @@
     <!--lock screen tile-->
 
     <string name="lock_tile_label">Lock</string>
+
+    <!--coin flip tile-->
+
+    <string name="coin_flip_tile_label">Coin Flip</string>
+    <!--tile label-->
+    <string name="coin_heads_label">Heads</string>
+    <string name="coin_tails_label">Tails</string>
 </resources>
