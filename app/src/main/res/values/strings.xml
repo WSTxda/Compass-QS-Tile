@@ -57,4 +57,17 @@
     <string name="coin_heads_label">Heads</string>
     <string name="coin_tails_label">Tails</string>
     <string name="coin_flip_count">Heads: %1$d Tails: %2$d</string>
+
+    <!--dice roll tile-->
+
+    <string name="dice_roll_tile_label">Dice Roll</string>
+    <!--tile label-->
+    <string name="dice_roll_label">Tap to roll</string>
+    <string name="dice_rolling_label">Rolling…</string>
+    <string name="dice_1_label">One</string>
+    <string name="dice_2_label">Two</string>
+    <string name="dice_3_label">Three</string>
+    <string name="dice_4_label">Four</string>
+    <string name="dice_5_label">Five</string>
+    <string name="dice_6_label">Six</string>
 </resources>

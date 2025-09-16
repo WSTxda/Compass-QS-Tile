@@ -117,5 +117,21 @@
                 android:name="android.service.quicksettings.TOGGLEABLE_TILE"
                 android:value="true" />
         </service>
+
+        <!--dice roll quick settings tile service-->
+
+        <service
+            android:name=".tiles.DiceRollTileService"
+            android:exported="true"
+            android:icon="@drawable/ic_dice_off"
+            android:label="@string/dice_roll_tile_label"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.service.quicksettings.TOGGLEABLE_TILE"
+                android:value="true" />
+        </service>
     </application>
 </manifest>
