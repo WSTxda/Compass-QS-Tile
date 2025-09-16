@@ -46,6 +46,12 @@
     <string name="level_tile_zero_degrees" translatable="false">0°</string>
     <string name="level_tile_label_degrees" translatable="false">%d°</string>
 
+    <!--lux meter tile-->
+
+    <string name="lux_meter_tile_label">Lux Meter</string>
+    <!--tile label-->
+    <string name="lux_meter_tile_label_lux" translatable="false">%d lx</string>
+
     <!--lock screen tile-->
 
     <string name="lock_tile_label">Lock</string>
