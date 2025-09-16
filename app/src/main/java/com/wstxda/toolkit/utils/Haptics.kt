@@ -2,16 +2,24 @@ package com.wstxda.toolkit.utils
 
 import android.app.NotificationManager
 import android.content.Context
+import android.media.AudioAttributes
 import android.media.AudioManager
 import android.os.Build
 import android.os.PowerManager
+import android.os.VibrationAttributes
 import android.os.VibrationEffect
 import android.os.Vibrator
 import android.os.VibratorManager
 import android.provider.Settings
+import android.util.Log
 import androidx.core.content.getSystemService
 
 class Haptics(private val context: Context) {
+
+    companion object {
+        private const val TAG = "MorseCodeFlasher"
+    }
+
     private val vibrator = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
         val vibratorManager = context.getSystemService<VibratorManager>()!!
         vibratorManager.defaultVibrator
@@ -56,5 +64,29 @@ class Haptics(private val context: Context) {
             )
         }
         vibrator.vibrate(effect)
+    }
+
+    fun morse(duration: Long) {
+        try {
+            val vibrationEffect =
+                VibrationEffect.createOneShot(duration, VibrationEffect.DEFAULT_AMPLITUDE)
+            val audioAttributes =
+                AudioAttributes.Builder().setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                    .setUsage(AudioAttributes.USAGE_ALARM).build()
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                val vibrationAttributes =
+                    VibrationAttributes.createForUsage(VibrationAttributes.USAGE_ALARM)
+                vibrator.vibrate(vibrationEffect, vibrationAttributes)
+            } else {
+                @Suppress("DEPRECATION") vibrator.vibrate(vibrationEffect, audioAttributes)
+            }
+        } catch (e: Exception) {
+            Log.e(TAG, "Failed to vibrate", e)
+        }
+    }
+
+    fun cancel() {
+        vibrator.cancel()
     }
 }

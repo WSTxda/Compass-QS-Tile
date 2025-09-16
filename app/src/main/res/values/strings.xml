@@ -70,4 +70,8 @@
     <string name="dice_4_label">Four</string>
     <string name="dice_5_label">Five</string>
     <string name="dice_6_label">Six</string>
+
+    <!--sos tile-->
+
+    <string name="sos_tile_label">SOS</string>
 </resources>

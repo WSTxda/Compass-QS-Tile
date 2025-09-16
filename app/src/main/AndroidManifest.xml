@@ -19,6 +19,10 @@
         android:name="android.hardware.sensor.gyroscope"
         android:required="false" />
 
+    <uses-feature
+        android:name="android.hardware.camera.flash"
+        android:required="false" />
+
     <application
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -29,8 +33,8 @@
 
         <activity
             android:name=".activity.AccessibilityPermission"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
         <service
             android:name=".services.accessibility.LockAccessibilityService"
@@ -125,6 +129,22 @@
             android:exported="true"
             android:icon="@drawable/ic_dice_off"
             android:label="@string/dice_roll_tile_label"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.service.quicksettings.TOGGLEABLE_TILE"
+                android:value="true" />
+        </service>
+
+        <!--sos quick settings tile service-->
+
+        <service
+            android:name=".tiles.SosTileService"
+            android:exported="true"
+            android:icon="@drawable/ic_sos"
+            android:label="@string/sos_tile_label"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
