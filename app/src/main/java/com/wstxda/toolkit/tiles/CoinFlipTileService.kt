@@ -1,7 +1,8 @@
 package com.wstxda.toolkit.tiles
 
 import android.graphics.drawable.Icon
-import android.os.Build
+import android.os.Build.VERSION
+import android.os.Build.VERSION_CODES
 import android.service.quicksettings.Tile
 import android.service.quicksettings.TileService
 import com.wstxda.toolkit.R
@@ -26,7 +27,7 @@ class CoinFlipTileService : TileService() {
         qsTile?.update {
             state = Tile.STATE_ACTIVE
             label = getString(R.string.coin_heads_label)
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            if (VERSION.SDK_INT >= VERSION_CODES.Q) {
                 subtitle = getString(R.string.coin_flip_tile_label)
             }
             icon = Icon.createWithResource(applicationContext, R.drawable.ic_coin_heads)
@@ -37,7 +38,7 @@ class CoinFlipTileService : TileService() {
         qsTile?.update {
             state = Tile.STATE_ACTIVE
             label = getString(R.string.coin_tails_label)
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            if (VERSION.SDK_INT >= VERSION_CODES.Q) {
                 subtitle = getString(R.string.coin_flip_tile_label)
             }
             icon = Icon.createWithResource(applicationContext, R.drawable.ic_coin_tails)
@@ -48,6 +49,9 @@ class CoinFlipTileService : TileService() {
         qsTile?.update {
             state = Tile.STATE_INACTIVE
             label = getString(R.string.coin_flip_tile_label)
+            if (VERSION.SDK_INT >= VERSION_CODES.Q) {
+                subtitle = getString(R.string.tile_label_off)
+            }
             icon = Icon.createWithResource(applicationContext, R.drawable.ic_coin_off)
         }
     }

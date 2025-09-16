@@ -18,6 +18,13 @@
 
     <string name="not_supported">Your device does not support this feature</string>
 
+    <!--general state tile-->
+
+    <string name="tile_label_on">On</string>
+    <string name="tile_label_off">Off</string>
+    <string name="tile_label_setup">Tap to setup</string>
+    <string name="tile_label_not_supported">Not supported</string>
+
     <!--compass tile-->
 
     <string name="compass_tile_label">Compass</string>

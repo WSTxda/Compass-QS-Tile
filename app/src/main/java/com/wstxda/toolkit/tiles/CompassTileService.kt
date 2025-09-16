@@ -17,12 +17,12 @@ import android.view.Display
 import android.widget.Toast
 import androidx.core.content.getSystemService
 import com.wstxda.toolkit.R
-import com.wstxda.toolkit.services.sensors.getAzimuthDegrees
 import com.wstxda.toolkit.resources.icon.CompassIconFactory
 import com.wstxda.toolkit.resources.label.label
 import com.wstxda.toolkit.services.NOTIFICATION_ID
 import com.wstxda.toolkit.services.channel
 import com.wstxda.toolkit.services.notification
+import com.wstxda.toolkit.services.sensors.getAzimuthDegrees
 import com.wstxda.toolkit.services.startForegroundCompat
 import com.wstxda.toolkit.update
 import com.wstxda.toolkit.utils.Haptics
@@ -116,7 +116,12 @@ class CompassTileService : TileService(), SensorEventListener {
     }
 
     private fun setActive() {
-        qsTile?.update { state = Tile.STATE_ACTIVE }
+        qsTile?.update {
+            state = Tile.STATE_ACTIVE
+            if (VERSION.SDK_INT >= VERSION_CODES.Q) {
+                subtitle = getString(R.string.compass_tile_label)
+            }
+        }
         startCompass()
     }
 
@@ -125,6 +130,9 @@ class CompassTileService : TileService(), SensorEventListener {
             state = Tile.STATE_INACTIVE
             icon = Icon.createWithResource(applicationContext, R.drawable.ic_compass_off)
             label = getString(R.string.compass_tile_label)
+            if (VERSION.SDK_INT >= VERSION_CODES.Q) {
+                subtitle = getString(R.string.tile_label_off)
+            }
         }
         stopCompass()
     }

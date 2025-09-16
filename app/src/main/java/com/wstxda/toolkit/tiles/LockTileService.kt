@@ -8,9 +8,10 @@ import android.os.Build
 import android.provider.Settings
 import android.service.quicksettings.Tile
 import android.service.quicksettings.TileService
-import com.wstxda.toolkit.update
-import com.wstxda.toolkit.services.accessibility.LockAccessibilityService
+import com.wstxda.toolkit.R
 import com.wstxda.toolkit.activity.AccessibilityPermission
+import com.wstxda.toolkit.services.accessibility.LockAccessibilityService
+import com.wstxda.toolkit.update
 
 class LockTileService : TileService() {
 
@@ -56,10 +57,16 @@ class LockTileService : TileService() {
 
     private fun updateTileState() {
         qsTile?.update {
-            state = when {
-                Build.VERSION.SDK_INT < Build.VERSION_CODES.P -> Tile.STATE_UNAVAILABLE
-                isAccessibilityServiceEnabled() -> Tile.STATE_ACTIVE
-                else -> Tile.STATE_INACTIVE
+            if (isAccessibilityServiceEnabled()) {
+                state = Tile.STATE_ACTIVE
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    subtitle = getString(R.string.tile_label_on)
+                }
+            } else {
+                state = Tile.STATE_INACTIVE
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    subtitle = getString(R.string.tile_label_setup)
+                }
             }
         }
     }

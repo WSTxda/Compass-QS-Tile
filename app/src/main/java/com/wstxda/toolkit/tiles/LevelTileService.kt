@@ -15,13 +15,13 @@ import android.util.Log
 import android.widget.Toast
 import androidx.core.content.getSystemService
 import com.wstxda.toolkit.R
-import com.wstxda.toolkit.services.sensors.Mode
-import com.wstxda.toolkit.services.sensors.getOrientation
-import com.wstxda.toolkit.services.sensors.getTilt
 import com.wstxda.toolkit.resources.icon.LevelIconFactory
 import com.wstxda.toolkit.services.NOTIFICATION_ID
 import com.wstxda.toolkit.services.channel
 import com.wstxda.toolkit.services.notification
+import com.wstxda.toolkit.services.sensors.Mode
+import com.wstxda.toolkit.services.sensors.getOrientation
+import com.wstxda.toolkit.services.sensors.getTilt
 import com.wstxda.toolkit.services.startForegroundCompat
 import com.wstxda.toolkit.update
 import com.wstxda.toolkit.utils.Haptics
@@ -89,10 +89,6 @@ class LevelTileService : TileService(), SensorEventListener {
     }
 
     private fun showNotSupported() {
-        qsTile?.apply {
-            state = Tile.STATE_UNAVAILABLE
-            updateTile()
-        }
         Toast.makeText(this, R.string.not_supported, Toast.LENGTH_LONG).show()
     }
 
@@ -104,7 +100,12 @@ class LevelTileService : TileService(), SensorEventListener {
     }
 
     private fun setActive() {
-        qsTile?.update { state = Tile.STATE_ACTIVE }
+        qsTile?.update {
+            state = Tile.STATE_ACTIVE
+            if (VERSION.SDK_INT >= VERSION_CODES.Q) {
+                subtitle = getString(R.string.level_tile_label)
+            }
+        }
         startLevel()
     }
 
@@ -113,6 +114,9 @@ class LevelTileService : TileService(), SensorEventListener {
             state = Tile.STATE_INACTIVE
             icon = Icon.createWithResource(applicationContext, R.drawable.ic_level_off)
             label = getString(R.string.level_tile_label)
+            if (VERSION.SDK_INT >= VERSION_CODES.Q) {
+                subtitle = getString(R.string.tile_label_off)
+            }
         }
         stopLevel()
         lastDegrees = null
