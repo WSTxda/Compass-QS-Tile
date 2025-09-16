@@ -11,7 +11,15 @@ import kotlin.random.Random
 
 class CoinFlipTileService : TileService() {
 
+    companion object {
+        private var headsCount = 0
+        private var tailsCount = 0
+    }
+
     override fun onStartListening() {
+    }
+
+    override fun onStopListening() {
         setInactive()
     }
 
@@ -24,22 +32,24 @@ class CoinFlipTileService : TileService() {
     }
 
     private fun setHeads() {
+        headsCount++
         qsTile?.update {
             state = Tile.STATE_ACTIVE
             label = getString(R.string.coin_heads_label)
             if (VERSION.SDK_INT >= VERSION_CODES.Q) {
-                subtitle = getString(R.string.coin_flip_tile_label)
+                subtitle = getString(R.string.coin_flip_count, headsCount, tailsCount)
             }
             icon = Icon.createWithResource(applicationContext, R.drawable.ic_coin_heads)
         }
     }
 
     private fun setTails() {
+        tailsCount++
         qsTile?.update {
             state = Tile.STATE_ACTIVE
             label = getString(R.string.coin_tails_label)
             if (VERSION.SDK_INT >= VERSION_CODES.Q) {
-                subtitle = getString(R.string.coin_flip_tile_label)
+                subtitle = getString(R.string.coin_flip_count, headsCount, tailsCount)
             }
             icon = Icon.createWithResource(applicationContext, R.drawable.ic_coin_tails)
         }
@@ -47,6 +57,8 @@ class CoinFlipTileService : TileService() {
 
     private fun setInactive() {
         qsTile?.update {
+            headsCount = 0
+            tailsCount = 0
             state = Tile.STATE_INACTIVE
             label = getString(R.string.coin_flip_tile_label)
             if (VERSION.SDK_INT >= VERSION_CODES.Q) {

@@ -56,4 +56,5 @@
     <!--tile label-->
     <string name="coin_heads_label">Heads</string>
     <string name="coin_tails_label">Tails</string>
+    <string name="coin_flip_count">Heads: %1$d Tails: %2$d</string>
 </resources>
