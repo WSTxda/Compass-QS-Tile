@@ -7,6 +7,7 @@ import android.os.Handler
 import android.os.Looper
 import android.service.quicksettings.Tile
 import android.service.quicksettings.TileService
+import android.util.Log
 import com.wstxda.toolkit.R
 import com.wstxda.toolkit.resources.icon.coinflip.CoinFlipIconFactory
 import com.wstxda.toolkit.resources.label.coinflip.coinFlipLabel
@@ -14,7 +15,6 @@ import com.wstxda.toolkit.utils.Haptics
 import com.wstxda.toolkit.utils.update
 import kotlin.random.Random
 
-@Suppress("unused")
 private const val TAG = "CoinFlipTileService"
 
 class CoinFlipTileService : TileService() {
@@ -29,18 +29,22 @@ class CoinFlipTileService : TileService() {
     }
 
     override fun onCreate() {
+        Log.i(TAG, "Create service")
         super.onCreate()
         haptics = Haptics(applicationContext)
     }
 
     override fun onStartListening() {
+        Log.i(TAG, "Start listening")
     }
 
     override fun onStopListening() {
+        Log.i(TAG, "Stop listening")
         updateTileAsInactive()
     }
 
     override fun onClick() {
+        Log.i(TAG, "Click")
         if (isAnimating) return
         val flipResult = Random.nextBoolean()
         updateTileAsFlipping(flipResult)

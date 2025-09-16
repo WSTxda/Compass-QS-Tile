@@ -84,6 +84,7 @@ class LuxMeterTileService : TileService(), SensorEventListener {
     }
 
     override fun onClick() {
+        Log.i(TAG, "Click")
         if (!isSupported) showNotSupported() else toggleTile()
     }
 
@@ -122,7 +123,7 @@ class LuxMeterTileService : TileService(), SensorEventListener {
 
     private fun startLuxMeter() {
         try {
-            Log.i(TAG, "Start")
+            Log.i(TAG, "Start lux meter")
             if (!START_FOREGROUND_IMMEDIATELY) {
                 startForegroundCompat(NOTIFICATION_ID, notification())
             }
@@ -138,7 +139,7 @@ class LuxMeterTileService : TileService(), SensorEventListener {
     }
 
     private fun stopLuxMeter() {
-        Log.i(TAG, "Stop")
+        Log.i(TAG, "Stop lux meter")
         if (!START_FOREGROUND_IMMEDIATELY) {
             stopForeground(STOP_FOREGROUND_DETACH)
         }
@@ -148,6 +149,7 @@ class LuxMeterTileService : TileService(), SensorEventListener {
     override fun onAccuracyChanged(sensor: Sensor, accuracy: Int) = Unit
 
     override fun onSensorChanged(event: SensorEvent) {
+        Log.v(TAG, "Sensor changed")
         val lux = event.getLux()
         Log.v(TAG, lux.toString())
         updateTileWithData(lux)

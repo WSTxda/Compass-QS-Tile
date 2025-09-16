@@ -101,6 +101,7 @@ class CompassTileService : TileService(), SensorEventListener {
     }
 
     override fun onClick() {
+        Log.i(TAG, "Click")
         if (!isSupported) {
             showNotSupported()
             return
@@ -139,7 +140,7 @@ class CompassTileService : TileService(), SensorEventListener {
 
     private fun startCompass() {
         try {
-            Log.i(TAG, "Start")
+            Log.i(TAG, "Start compass")
             if (!START_FOREGROUND_IMMEDIATELY) {
                 startForegroundCompat(NOTIFICATION_ID, notification())
             }
@@ -155,7 +156,7 @@ class CompassTileService : TileService(), SensorEventListener {
     }
 
     private fun stopCompass() {
-        Log.i(TAG, "Stop")
+        Log.i(TAG, "Stop compass")
         if (!START_FOREGROUND_IMMEDIATELY) {
             stopForeground(STOP_FOREGROUND_DETACH)
         }
@@ -166,6 +167,7 @@ class CompassTileService : TileService(), SensorEventListener {
 
     private var lastDegrees: Float? = null
     override fun onSensorChanged(event: SensorEvent) {
+        Log.v(TAG, "Sensor changed")
         val degrees = event.getAzimuthDegrees(displayRotation)
         if (lastDegrees == null) {
             lastDegrees = degrees

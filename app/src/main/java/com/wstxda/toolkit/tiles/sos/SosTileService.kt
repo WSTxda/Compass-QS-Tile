@@ -8,6 +8,7 @@ import android.os.Handler
 import android.os.Looper
 import android.service.quicksettings.Tile
 import android.service.quicksettings.TileService
+import android.util.Log
 import com.wstxda.toolkit.R
 import com.wstxda.toolkit.services.camera.sos.MorseCodeFlasher
 import com.wstxda.toolkit.utils.Haptics
@@ -28,6 +29,7 @@ class SosTileService : TileService() {
 
     private val torchCallback = object : CameraManager.TorchCallback() {
         override fun onTorchModeChanged(cameraId: String, enabled: Boolean) {
+            Log.i(TAG, "Torch mode changed")
             super.onTorchModeChanged(cameraId, enabled)
             if (this@SosTileService.cameraId == cameraId) {
                 isTorchOn = enabled
@@ -36,6 +38,7 @@ class SosTileService : TileService() {
         }
 
         override fun onTorchModeUnavailable(cameraId: String) {
+            Log.i(TAG, "Torch mode unavailable")
             super.onTorchModeUnavailable(cameraId)
             if (this@SosTileService.cameraId == cameraId) {
                 isTorchOn = false
@@ -45,6 +48,7 @@ class SosTileService : TileService() {
     }
 
     override fun onCreate() {
+        Log.i(TAG, "Create")
         super.onCreate()
         haptics = Haptics(applicationContext)
         sosService = MorseCodeFlasher(this)
@@ -65,11 +69,13 @@ class SosTileService : TileService() {
     }
 
     override fun onStartListening() {
+        Log.d(TAG, "Start listening")
         super.onStartListening()
         updateTileState()
     }
 
     override fun onClick() {
+        Log.i(TAG, "Click")
         if (qsTile.state == Tile.STATE_UNAVAILABLE) return
         if (!sosService.isRunning) {
             updateTileAsActive()

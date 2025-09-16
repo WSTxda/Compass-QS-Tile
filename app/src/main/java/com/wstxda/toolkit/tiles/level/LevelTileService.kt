@@ -86,6 +86,7 @@ class LevelTileService : TileService(), SensorEventListener {
     }
 
     override fun onClick() {
+        Log.i(TAG, "Click")
         if (!isSupported) {
             showNotSupported()
             return
@@ -125,7 +126,7 @@ class LevelTileService : TileService(), SensorEventListener {
 
     private fun startLevel() {
         try {
-            Log.i(TAG, "Start")
+            Log.i(TAG, "Start level")
             if (!START_FOREGROUND_IMMEDIATELY) {
                 startForegroundCompat(NOTIFICATION_ID, notification())
             }
@@ -141,7 +142,7 @@ class LevelTileService : TileService(), SensorEventListener {
     }
 
     private fun stopLevel() {
-        Log.i(TAG, "Stop")
+        Log.i(TAG, "Stop level")
         if (!START_FOREGROUND_IMMEDIATELY) {
             stopForeground(STOP_FOREGROUND_DETACH)
         }
@@ -151,6 +152,7 @@ class LevelTileService : TileService(), SensorEventListener {
     override fun onAccuracyChanged(sensor: Sensor, accuracy: Int) = Unit
 
     override fun onSensorChanged(event: SensorEvent) {
+        Log.v(TAG, "Sensor changed")
         val (pitch, roll, balance, mode) = getOrientation(this, event)
         val degrees = when (mode) {
             Mode.Line -> balance.roundToInt()

@@ -36,6 +36,7 @@ class MorseCodeFlasher(private val context: Context) {
     private val unitDuration = 200L
 
     fun startFlasher() {
+        Log.i(TAG, "Start flasher")
         if (cameraId == null) {
             Log.w(TAG, "Cannot start flasher: no cameraId")
             return
@@ -61,6 +62,7 @@ class MorseCodeFlasher(private val context: Context) {
     }
 
     fun stopFlasher() {
+        Log.i(TAG, "Stop flasher")
         sosJob?.cancel()
         sosJob = null
         setTorchMode(false)
@@ -68,6 +70,7 @@ class MorseCodeFlasher(private val context: Context) {
     }
 
     fun destroyService() {
+        Log.i(TAG, "Destroy service")
         sosScope.cancel()
         stopFlasher()
     }

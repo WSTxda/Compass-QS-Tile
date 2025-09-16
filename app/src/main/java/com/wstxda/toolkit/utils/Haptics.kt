@@ -17,7 +17,7 @@ import androidx.core.content.getSystemService
 class Haptics(private val context: Context) {
 
     companion object {
-        private const val TAG = "MorseCodeFlasher"
+        private const val TAG = "Haptics"
     }
 
     private val vibrator = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
@@ -54,6 +54,7 @@ class Haptics(private val context: Context) {
         }
 
     fun tick() {
+        Log.d(TAG, "Tick")
         if (!areHapticsEnabled) return
 
         val effect = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
@@ -67,6 +68,7 @@ class Haptics(private val context: Context) {
     }
 
     fun morse(duration: Long) {
+        Log.d(TAG, "Morse: duration=$duration")
         try {
             val vibrationEffect =
                 VibrationEffect.createOneShot(duration, VibrationEffect.DEFAULT_AMPLITUDE)
@@ -87,6 +89,7 @@ class Haptics(private val context: Context) {
     }
 
     fun cancel() {
+        Log.d(TAG, "Cancel")
         vibrator.cancel()
     }
 }

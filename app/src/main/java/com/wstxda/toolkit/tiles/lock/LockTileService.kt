@@ -8,13 +8,13 @@ import android.os.Build
 import android.provider.Settings
 import android.service.quicksettings.Tile
 import android.service.quicksettings.TileService
+import android.util.Log
 import com.wstxda.toolkit.R
 import com.wstxda.toolkit.activity.AccessibilityPermission
 import com.wstxda.toolkit.services.accessibility.lock.LockAccessibility
 import com.wstxda.toolkit.utils.Haptics
 import com.wstxda.toolkit.utils.update
 
-@Suppress("unused")
 private const val TAG = "LockTileService"
 
 class LockTileService : TileService() {
@@ -25,22 +25,26 @@ class LockTileService : TileService() {
     }
 
     override fun onCreate() {
+        Log.i(TAG, "Create")
         super.onCreate()
         haptics = Haptics(applicationContext)
     }
 
     override fun onStartListening() {
+        Log.i(TAG, "Start listening")
         super.onStartListening()
         updateTileState()
     }
 
     override fun onTileAdded() {
+        Log.i(TAG, "Tile added")
         super.onTileAdded()
         updateTileState()
     }
 
     @SuppressLint("StartActivityAndCollapseDeprecated")
     override fun onClick() {
+        Log.i(TAG, "Click")
         if (!isAccessibilityServiceEnabled()) {
             val intent = Intent(this, AccessibilityPermission::class.java).apply {
                 flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
