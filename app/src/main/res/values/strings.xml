@@ -24,6 +24,7 @@
     <string name="tile_label_on">On</string>
     <string name="tile_label_off">Off</string>
     <string name="tile_label_setup">Tap to setup</string>
+    <string name="tile_label_unavailable">Unavailable</string>
     <string name="tile_label_not_supported">Not supported</string>
 
     <!--compass tile-->
@@ -61,6 +62,7 @@
 
     <string name="coin_flip_tile_label">Coin Flip</string>
     <!--tile label-->
+    <string name="coin_flip_label">Tap to flip</string>
     <string name="coin_flippling_label">Flipping…</string>
     <string name="coin_flip_count">Heads: %1$d Tails: %2$d</string>
     <string name="coin_heads_label">Heads</string>

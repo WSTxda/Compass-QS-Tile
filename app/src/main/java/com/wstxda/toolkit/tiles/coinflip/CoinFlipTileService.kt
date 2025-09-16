@@ -42,27 +42,42 @@ class CoinFlipTileService : TileService() {
 
     override fun onClick() {
         if (isAnimating) return
-        updateTileAsFlipping()
+        val flipResult = Random.nextBoolean()
+        updateTileAsFlipping(flipResult)
     }
 
-    private fun updateTileAsFlipping() {
+    private fun updateTileAsFlipping(flipResult: Boolean) {
         isAnimating = true
-        val duration = Random.nextLong(500, 1000)
-        val flipResult = Random.nextBoolean()
+        val frames = listOf(
+            CoinFlipIconFactory.getHeadsIcon(), CoinFlipIconFactory.getTailsIcon()
+        )
+        var frameIndex = 0
+        val maxFrames = Random.nextInt(10, 15)
 
-        qsTile?.update {
-            state = Tile.STATE_ACTIVE
-            label = getString(R.string.coin_flippling_label)
-            if (VERSION.SDK_INT >= VERSION_CODES.Q) {
-                subtitle = getString(R.string.coin_flip_count, headsCount, tailsCount)
+        fun updateTile(isHeads: Boolean) {
+            qsTile?.update {
+                state = Tile.STATE_ACTIVE
+                label = getString(R.string.coin_flippling_label)
+                icon = Icon.createWithResource(
+                    applicationContext, if (isHeads) frames[0] else frames[1]
+                )
             }
-            icon = Icon.createWithResource(applicationContext, CoinFlipIconFactory.getFlipIcon())
         }
 
-        handler.postDelayed({
-            updateTileWithResult(flipResult)
-            isAnimating = false
-        }, duration)
+        val runnable = object : Runnable {
+            override fun run() {
+                if (frameIndex < maxFrames) {
+                    updateTile(frameIndex % 2 == 0)
+                    haptics.tick()
+                    frameIndex++
+                    handler.postDelayed(this, 150)
+                } else {
+                    updateTileWithResult(flipResult)
+                    isAnimating = false
+                }
+            }
+        }
+        handler.post(runnable)
     }
 
     private fun updateTileWithResult(isHeads: Boolean) {
@@ -95,7 +110,7 @@ class CoinFlipTileService : TileService() {
             state = Tile.STATE_INACTIVE
             label = getString(R.string.coin_flip_tile_label)
             if (VERSION.SDK_INT >= VERSION_CODES.Q) {
-                subtitle = getString(R.string.tile_label_off)
+                subtitle = getString(R.string.coin_flip_label)
             }
             icon = Icon.createWithResource(applicationContext, R.drawable.ic_coin_off)
         }
