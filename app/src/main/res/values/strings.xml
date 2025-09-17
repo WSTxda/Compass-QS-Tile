@@ -63,7 +63,6 @@
     <string name="coin_flip_tile_label">Coin Flip</string>
     <!--tile label-->
     <string name="coin_flip_label">Tap to flip</string>
-    <string name="coin_flippling_label">Flipping…</string>
     <string name="coin_flip_count">Heads: %1$d Tails: %2$d</string>
     <string name="coin_heads_label">Heads</string>
     <string name="coin_tails_label">Tails</string>
