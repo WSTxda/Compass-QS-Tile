@@ -88,9 +88,9 @@
 
     <string name="counter_tile_label">Counter</string>
     <!--tile label-->
-    <string name="counter_add_tile_label">Add value</string>
-    <string name="counter_remove_tile_label">Remove value</string>
-    <string name="counter_reset_tile_label">Reset value</string>
+    <string name="counter_add_tile_label">Add</string>
+    <string name="counter_remove_tile_label">Remove</string>
+    <string name="counter_reset_tile_label">Reset</string>
 
     <!--screenshot tile-->
 

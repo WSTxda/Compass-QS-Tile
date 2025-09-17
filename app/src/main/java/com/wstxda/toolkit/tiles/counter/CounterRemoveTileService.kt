@@ -37,7 +37,7 @@ class CounterRemoveTileService : TileService() {
         qsTile?.update {
             icon = Icon.createWithResource(applicationContext, R.drawable.ic_counter_remove)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                subtitle = getString(R.string.counter_remove_tile_label)
+                subtitle = getString(R.string.counter_tile_label)
             }
 
             when (lastAction) {
