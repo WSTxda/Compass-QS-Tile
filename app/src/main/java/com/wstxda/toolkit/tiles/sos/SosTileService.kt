@@ -4,6 +4,7 @@ import android.content.pm.PackageManager
 import android.graphics.drawable.Icon
 import android.hardware.camera2.CameraCharacteristics
 import android.hardware.camera2.CameraManager
+import android.os.Build
 import android.os.Handler
 import android.os.Looper
 import android.service.quicksettings.Tile
@@ -14,7 +15,6 @@ import com.wstxda.toolkit.services.camera.sos.MorseCodeFlasher
 import com.wstxda.toolkit.utils.Haptics
 import com.wstxda.toolkit.utils.update
 
-@Suppress("unused")
 private const val TAG = "SosTileService"
 
 class SosTileService : TileService() {
@@ -25,12 +25,12 @@ class SosTileService : TileService() {
     private lateinit var haptics: Haptics
 
     private var isTorchOn = false
+    private var isTorchAvailable = false
     private var cameraId: String? = null
 
     private val torchCallback = object : CameraManager.TorchCallback() {
         override fun onTorchModeChanged(cameraId: String, enabled: Boolean) {
-            Log.i(TAG, "Torch mode changed")
-            super.onTorchModeChanged(cameraId, enabled)
+            Log.i(TAG, "Torch mode changed to: $enabled for cameraId: $cameraId")
             if (this@SosTileService.cameraId == cameraId) {
                 isTorchOn = enabled
                 updateTileState()
@@ -38,10 +38,9 @@ class SosTileService : TileService() {
         }
 
         override fun onTorchModeUnavailable(cameraId: String) {
-            Log.i(TAG, "Torch mode unavailable")
-            super.onTorchModeUnavailable(cameraId)
             if (this@SosTileService.cameraId == cameraId) {
-                isTorchOn = false
+                Log.i(TAG, "Torch mode unavailable for cameraId: $cameraId")
+                isTorchAvailable = false
                 updateTileState()
             }
         }
@@ -58,13 +57,19 @@ class SosTileService : TileService() {
             val cameraIds = cameraManager.cameraIdList
             cameraId = cameraIds.find { id ->
                 val characteristics = cameraManager.getCameraCharacteristics(id)
-                characteristics.get(CameraCharacteristics.FLASH_INFO_AVAILABLE) == true
+                val hasFlash =
+                    characteristics.get(CameraCharacteristics.FLASH_INFO_AVAILABLE) == true
+                val facingBack =
+                    characteristics.get(CameraCharacteristics.LENS_FACING) == CameraCharacteristics.LENS_FACING_BACK
+                hasFlash && facingBack
             }
             cameraId?.let {
                 cameraManager.registerTorchCallback(torchCallback, handler)
+                isTorchAvailable = true
             }
         } catch (_: Exception) {
             cameraId = null
+            isTorchAvailable = false
         }
     }
 
@@ -75,8 +80,10 @@ class SosTileService : TileService() {
     }
 
     override fun onClick() {
-        Log.i(TAG, "Click")
+        Log.d(TAG, "Click")
+        super.onClick()
         if (qsTile.state == Tile.STATE_UNAVAILABLE) return
+
         if (!sosService.isRunning) {
             updateTileAsActive()
         } else {
@@ -105,17 +112,18 @@ class SosTileService : TileService() {
     private fun updateTileState() {
         val tile = qsTile ?: return
 
-        val hasFlash =
+        val hasFlashHardware =
             packageManager.hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH) && cameraId != null
-        if (!hasFlash) {
+
+        if (!hasFlashHardware) {
+            updateTileAsUnavailable(tile)
+            return
+        }
+        if (!sosService.isRunning && (!isTorchAvailable || isTorchOn)) {
             updateTileAsUnavailable(tile)
             return
         }
 
-        if (isTorchOn && !sosService.isRunning) {
-            updateTileAsUnavailable(tile)
-            return
-        }
         tile.update {
             state = if (sosService.isRunning) Tile.STATE_ACTIVE else Tile.STATE_INACTIVE
             icon = Icon.createWithResource(this@SosTileService, R.drawable.ic_sos)

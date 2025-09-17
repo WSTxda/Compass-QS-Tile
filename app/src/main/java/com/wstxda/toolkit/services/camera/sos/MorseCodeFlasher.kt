@@ -1,6 +1,7 @@
 package com.wstxda.toolkit.services.camera.sos
 
 import android.content.Context
+import android.hardware.camera2.CameraCharacteristics
 import android.hardware.camera2.CameraManager
 import android.util.Log
 import com.wstxda.toolkit.utils.Haptics
@@ -24,7 +25,15 @@ class MorseCodeFlasher(private val context: Context) {
     private val cameraManager by lazy { context.getSystemService(Context.CAMERA_SERVICE) as CameraManager }
     private val cameraId: String? by lazy {
         try {
-            cameraManager.cameraIdList[0]
+            val ids = cameraManager.cameraIdList
+            ids.find { id ->
+                val characteristics = cameraManager.getCameraCharacteristics(id)
+                val hasFlash =
+                    characteristics.get(CameraCharacteristics.FLASH_INFO_AVAILABLE) == true
+                val facingBack =
+                    characteristics.get(CameraCharacteristics.LENS_FACING) == CameraCharacteristics.LENS_FACING_BACK
+                hasFlash && facingBack
+            }
         } catch (e: Exception) {
             Log.w(TAG, "No camera available or failed to get cameraId", e)
             null
@@ -79,15 +88,11 @@ class MorseCodeFlasher(private val context: Context) {
         get() = sosJob?.isActive == true
 
     private suspend fun sendS() {
-        repeat(3) {
-            dot()
-        }
+        repeat(3) { dot() }
     }
 
     private suspend fun sendO() {
-        repeat(3) {
-            dash()
-        }
+        repeat(3) { dash() }
     }
 
     private suspend fun dot() {
@@ -108,6 +113,7 @@ class MorseCodeFlasher(private val context: Context) {
     }
 
     private fun setTorchMode(enabled: Boolean) {
+        Log.v(TAG, "Set torch mode: $enabled")
         cameraId?.let { id ->
             try {
                 cameraManager.setTorchMode(id, enabled)
