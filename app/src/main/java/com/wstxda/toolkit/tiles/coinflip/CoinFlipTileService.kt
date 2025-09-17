@@ -22,7 +22,7 @@ class CoinFlipTileService : TileService() {
     }
 
     override fun onCreate() {
-        Log.i(TAG, "Create service")
+        Log.i(TAG, "Create")
         super.onCreate()
     }
 

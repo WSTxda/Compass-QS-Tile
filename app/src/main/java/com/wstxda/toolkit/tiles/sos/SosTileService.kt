@@ -74,13 +74,13 @@ class SosTileService : TileService() {
     }
 
     override fun onStartListening() {
-        Log.d(TAG, "Start listening")
+        Log.i(TAG, "Start listening")
         super.onStartListening()
         updateTileState()
     }
 
     override fun onClick() {
-        Log.d(TAG, "Click")
+        Log.i(TAG, "Click")
         super.onClick()
         if (qsTile.state == Tile.STATE_UNAVAILABLE) return
 

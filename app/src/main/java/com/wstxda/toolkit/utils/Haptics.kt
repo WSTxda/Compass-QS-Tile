@@ -54,7 +54,7 @@ class Haptics(private val context: Context) {
         }
 
     fun tick() {
-        Log.d(TAG, "Tick")
+        Log.i(TAG, "Tick")
         if (!areHapticsEnabled) return
 
         val effect = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
@@ -68,7 +68,7 @@ class Haptics(private val context: Context) {
     }
 
     fun morse(duration: Long) {
-        Log.d(TAG, "Morse: duration=$duration")
+        Log.i(TAG, "Morse: duration=$duration")
         try {
             val vibrationEffect =
                 VibrationEffect.createOneShot(duration, VibrationEffect.DEFAULT_AMPLITUDE)
@@ -89,7 +89,7 @@ class Haptics(private val context: Context) {
     }
 
     fun cancel() {
-        Log.d(TAG, "Cancel")
+        Log.i(TAG, "Cancel")
         vibrator.cancel()
     }
 }
