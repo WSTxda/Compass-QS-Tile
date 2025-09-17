@@ -15,14 +15,14 @@ private const val TAG = "CounterResetTileService"
 class CounterResetTileService : TileService() {
 
     override fun onStartListening() {
-        super.onStartListening()
         Log.i(TAG, "Start listening")
+        super.onStartListening()
         updateTile()
     }
 
     override fun onClick() {
-        super.onClick()
         Log.i(TAG, "Click")
+        super.onClick()
         CounterValue.reset(applicationContext)
         requestListeningState(
             applicationContext, ComponentName(applicationContext, CounterAddTileService::class.java)
@@ -31,8 +31,6 @@ class CounterResetTileService : TileService() {
             applicationContext,
             ComponentName(applicationContext, CounterRemoveTileService::class.java)
         )
-
-        updateTile()
     }
 
     private fun updateTile() {

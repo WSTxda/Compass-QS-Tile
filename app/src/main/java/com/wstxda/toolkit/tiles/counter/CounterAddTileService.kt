@@ -15,41 +15,43 @@ private const val TAG = "CounterAddTileService"
 class CounterAddTileService : TileService() {
 
     override fun onStartListening() {
-        super.onStartListening()
         Log.i(TAG, "Start listening")
-        updateTileAsInactive()
+        super.onStartListening()
+        updateTile()
     }
 
     override fun onClick() {
-        super.onClick()
         Log.i(TAG, "Click")
+        super.onClick()
         CounterValue.add(applicationContext)
-        updateTileAsActive()
+        updateTile()
         requestListeningState(
             applicationContext,
             ComponentName(applicationContext, CounterRemoveTileService::class.java)
         )
     }
 
-    private fun updateTileAsActive() {
+    private fun updateTile() {
+        val value = CounterValue.getValue(applicationContext)
+        val lastAction = CounterValue.getLastAction(applicationContext)
+
         qsTile?.update {
-            state = Tile.STATE_ACTIVE
-            label = CounterValue.getValue(applicationContext).toString()
+            icon = Icon.createWithResource(applicationContext, R.drawable.ic_counter_add)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 subtitle = getString(R.string.counter_add_tile_label)
             }
-            icon = Icon.createWithResource(applicationContext, R.drawable.ic_counter_add)
-        }
-    }
 
-    private fun updateTileAsInactive() {
-        qsTile?.update {
-            state = Tile.STATE_INACTIVE
-            label = getString(R.string.counter_add_tile_label)
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                subtitle = getString(R.string.counter_tile_label)
+            when (lastAction) {
+                CounterValue.ACTION_REMOVE, CounterValue.ACTION_RESET -> {
+                    state = Tile.STATE_INACTIVE
+                    label = getString(R.string.counter_add_tile_label)
+                }
+
+                else -> {
+                    state = Tile.STATE_ACTIVE
+                    label = value.toString()
+                }
             }
-            icon = Icon.createWithResource(applicationContext, R.drawable.ic_counter_add)
         }
     }
 }
