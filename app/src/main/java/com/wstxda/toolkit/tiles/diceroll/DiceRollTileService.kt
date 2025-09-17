@@ -74,6 +74,7 @@ class DiceRollTileService : TileService() {
                 } else {
                     updateTileWithFace(finalRoll)
                     isAnimating = false
+                    haptics.tick()
                 }
             }
         }
