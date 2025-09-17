@@ -9,15 +9,12 @@ import android.util.Log
 import com.wstxda.toolkit.R
 import com.wstxda.toolkit.resources.icon.coinflip.CoinFlipIconFactory
 import com.wstxda.toolkit.resources.label.coinflip.coinFlipLabel
-import com.wstxda.toolkit.utils.Haptics
 import com.wstxda.toolkit.utils.update
 import kotlin.random.Random
 
 private const val TAG = "CoinFlipTileService"
 
 class CoinFlipTileService : TileService() {
-
-    private lateinit var haptics: Haptics
 
     companion object {
         private var headsCount = 0
@@ -27,7 +24,6 @@ class CoinFlipTileService : TileService() {
     override fun onCreate() {
         Log.i(TAG, "Create service")
         super.onCreate()
-        haptics = Haptics(applicationContext)
     }
 
     override fun onStartListening() {
@@ -63,7 +59,6 @@ class CoinFlipTileService : TileService() {
                 else CoinFlipIconFactory.getTailsIcon()
             )
         }
-        haptics.tick()
     }
 
     private fun updateTileAsInactive() {
