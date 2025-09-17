@@ -92,4 +92,8 @@
     <string name="counter_add_tile_label">Add value</string>
     <string name="counter_remove_tile_label">Remove value</string>
     <string name="counter_reset_tile_label">Reset value</string>
+
+    <!--screenshot tile-->
+
+    <string name="screenshot_tile_label">Screenshot</string>
 </resources>

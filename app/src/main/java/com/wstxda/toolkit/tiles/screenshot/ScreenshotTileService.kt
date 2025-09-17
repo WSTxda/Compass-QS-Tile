@@ -1,4 +1,4 @@
-package com.wstxda.toolkit.tiles.lock
+package com.wstxda.toolkit.tiles.screenshot
 
 import android.annotation.SuppressLint
 import android.app.PendingIntent
@@ -7,16 +7,15 @@ import android.os.Build
 import android.service.quicksettings.Tile
 import android.service.quicksettings.TileService
 import android.util.Log
-import androidx.annotation.RequiresApi
 import com.wstxda.toolkit.R
 import com.wstxda.toolkit.activity.AccessibilityPermission
-import com.wstxda.toolkit.services.accessibility.TileAccessibilityAction
+import com.wstxda.toolkit.activity.ScreenshotActivity
 import com.wstxda.toolkit.services.accessibility.TileAccessibilityService
 import com.wstxda.toolkit.utils.update
 
-private const val TAG = "LockTileService"
+private const val TAG = "ScreenshotTileService"
 
-class LockTileService : TileService() {
+class ScreenshotTileService : TileService() {
     override fun onCreate() {
         Log.i(TAG, "Create")
         super.onCreate()
@@ -34,7 +33,6 @@ class LockTileService : TileService() {
         updateTileState()
     }
 
-    @RequiresApi(Build.VERSION_CODES.P)
     @SuppressLint("StartActivityAndCollapseDeprecated")
     override fun onClick() {
         Log.i(TAG, "Click")
@@ -54,17 +52,22 @@ class LockTileService : TileService() {
             return
         }
 
-        val intent = Intent(this, TileAccessibilityService::class.java).apply {
-            putExtra(
-                TileAccessibilityService.ACTION_KEY, TileAccessibilityAction.LOCK_SCREEN
-            )
+        val intent = Intent(this, ScreenshotActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
-        startService(intent)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+            val pendingIntent = PendingIntent.getActivity(
+                this, 0, intent, PendingIntent.FLAG_IMMUTABLE
+            )
+            startActivityAndCollapse(pendingIntent)
+        } else {
+            @Suppress("DEPRECATION") startActivityAndCollapse(intent)
+        }
     }
 
     private fun updateTileState() {
         qsTile?.update {
-            if (TileAccessibilityService.isServiceEnabled(this@LockTileService)) {
+            if (TileAccessibilityService.isServiceEnabled(this@ScreenshotTileService)) {
                 state = Tile.STATE_ACTIVE
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                     subtitle = getString(R.string.tile_label_on)

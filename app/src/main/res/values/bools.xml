@@ -3,4 +3,5 @@
     <!--control tiles visibility-->
 
     <bool name="enable_lock_tile">false</bool>
+    <bool name="enable_screenshot_tile">false</bool>
 </resources>

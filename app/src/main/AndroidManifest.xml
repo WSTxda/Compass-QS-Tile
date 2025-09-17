@@ -37,7 +37,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <!--accessibility service/activity for lock screen tile-->
+        <!--activity for tiles-->
+
+        <activity
+            android:name=".activity.ScreenshotActivity"
+            android:exported="false"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <!--accessibility service/activity for tiles-->
 
         <activity
             android:name=".activity.AccessibilityPermission"
@@ -45,8 +52,9 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
         <service
-            android:name=".services.accessibility.lock.LockAccessibility"
+            android:name=".services.accessibility.TileAccessibilityService"
             android:exported="true"
+            android:label="@string/app_name"
             android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE"
             tools:ignore="AccessibilityPolicy">
             <intent-filter>
@@ -207,6 +215,23 @@
             </intent-filter>
             <meta-data
                 android:name="android.service.quicksettings.INACTIVE_TILE"
+                android:value="true" />
+        </service>
+
+        <!--screenshot quick settings tile service-->
+
+        <service
+            android:name=".tiles.screenshot.ScreenshotTileService"
+            android:enabled="@bool/enable_screenshot_tile"
+            android:exported="true"
+            android:icon="@drawable/ic_screenshot"
+            android:label="@string/screenshot_tile_label"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.service.quicksettings.TOGGLEABLE_TILE"
                 android:value="true" />
         </service>
 
