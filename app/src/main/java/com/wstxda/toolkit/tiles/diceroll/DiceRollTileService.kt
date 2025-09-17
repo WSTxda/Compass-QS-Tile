@@ -47,28 +47,30 @@ class DiceRollTileService : TileService() {
 
     private fun updateTileAsRolling(finalRoll: Int) {
         isAnimating = true
-        val frames = DiceRollIconFactory.getAnimationFrames()
+        val frames = DiceRollIconFactory.getAnimationFrames().shuffled()
         var frameIndex = 0
 
-        fun updateTile(frame: Int) {
-            val rollNumber = frame % 6 + 1
+        fun updateTile(frameResId: Int) {
+            val rollNumber = DiceRollIconFactory.getNumberForDrawable(frameResId)
             qsTile?.update {
                 state = Tile.STATE_ACTIVE
                 label = diceLabel(rollNumber)
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                     subtitle = getString(R.string.dice_rolling_label)
                 }
-                icon = Icon.createWithResource(applicationContext, frames[frame])
+                icon = Icon.createWithResource(applicationContext, frameResId)
             }
         }
 
         val runnable = object : Runnable {
             override fun run() {
                 if (frameIndex < frames.size) {
-                    updateTile(frameIndex)
+                    updateTile(frames[frameIndex])
                     haptics.tick()
+
+                    val delay = 60 + (frameIndex * 30)
                     frameIndex++
-                    handler.postDelayed(this, 150)
+                    handler.postDelayed(this, delay.toLong())
                 } else {
                     updateTileWithFace(finalRoll)
                     isAnimating = false
@@ -87,15 +89,7 @@ class DiceRollTileService : TileService() {
                 subtitle = getString(R.string.dice_roll_label)
             }
             icon = Icon.createWithResource(
-                applicationContext, when (roll) {
-                    1 -> R.drawable.ic_dice_1
-                    2 -> R.drawable.ic_dice_2
-                    3 -> R.drawable.ic_dice_3
-                    4 -> R.drawable.ic_dice_4
-                    5 -> R.drawable.ic_dice_5
-                    6 -> R.drawable.ic_dice_6
-                    else -> R.drawable.ic_dice_off
-                }
+                applicationContext, DiceRollIconFactory.getDrawableForNumber(roll)
             )
         }
     }
@@ -109,7 +103,7 @@ class DiceRollTileService : TileService() {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 subtitle = getString(R.string.dice_roll_label)
             }
-            icon = Icon.createWithResource(applicationContext, R.drawable.ic_dice_off)
+            icon = Icon.createWithResource(applicationContext, DiceRollIconFactory.diceOff)
         }
     }
 }
