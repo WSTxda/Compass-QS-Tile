@@ -7,6 +7,7 @@ import android.service.quicksettings.Tile
 import android.service.quicksettings.TileService
 import android.util.Log
 import com.wstxda.toolkit.R
+import com.wstxda.toolkit.utils.counter.CounterValue
 import com.wstxda.toolkit.utils.update
 
 private const val TAG = "CounterRemoveTileService"
@@ -14,21 +15,25 @@ private const val TAG = "CounterRemoveTileService"
 class CounterRemoveTileService : TileService() {
 
     override fun onStartListening() {
+        super.onStartListening()
         Log.i(TAG, "Start listening")
         updateTileAsInactive()
     }
 
     override fun onClick() {
+        super.onClick()
         Log.i(TAG, "Click")
-        Counter.remove(applicationContext)
+        CounterValue.remove(applicationContext)
         updateTileAsActive()
-        requestListeningState(this, ComponentName(this, CounterAddTileService::class.java))
+        requestListeningState(
+            applicationContext, ComponentName(applicationContext, CounterAddTileService::class.java)
+        )
     }
 
     private fun updateTileAsActive() {
         qsTile?.update {
             state = Tile.STATE_ACTIVE
-            label = Counter.getValue(applicationContext).toString()
+            label = CounterValue.getValue(applicationContext).toString()
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 subtitle = getString(R.string.counter_remove_tile_label)
             }

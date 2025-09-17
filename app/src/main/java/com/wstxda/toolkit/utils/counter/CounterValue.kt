@@ -1,11 +1,11 @@
-package com.wstxda.toolkit.tiles.counter
+package com.wstxda.toolkit.utils.counter
 
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import androidx.core.content.edit
 
-object Counter {
+object CounterValue {
     private const val PREFS_NAME = "CounterPrefs"
     private const val KEY_COUNTER = "counterValue"
     const val ACTION_COUNTER_UPDATED = "com.wstxda.toolkit.COUNTER_UPDATED"
@@ -34,5 +34,9 @@ object Counter {
         val newValue = getValue(context) - 1
         setValue(context, newValue)
         return newValue
+    }
+
+    fun reset(context: Context) {
+        setValue(context, 0)
     }
 }
