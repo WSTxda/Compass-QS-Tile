@@ -11,8 +11,8 @@ android {
         applicationId = "com.wstxda.toolkit"
         minSdk = 26
         targetSdk = 36
-        versionCode = 420
-        versionName = "4.2"
+        versionCode = 100
+        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
