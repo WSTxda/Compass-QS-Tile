@@ -1,6 +1,6 @@
-# Toolkit Tiles – Useful Quick Settings Tools
+# Toolkit Tiles – Essential Tools in Your Quick Settings
 
-Toolkit Tiles integrates useful tools directly into your Android Quick Settings panel, allowing instant access with a single tap—no need to launch separate apps.
+A collection of simple and useful tools that live in your Android Quick Settings panel for instant access.
 
 [![GitHub Actions Status](https://img.shields.io/github/actions/workflow/status/WSTxda/Toolkit-Tiles/.github%2Fworkflows%2Fandroid.yml?style=for-the-badge&logo=github-actions&labelColor=21262D&color=3FB950)](https://github.com/WSTxda/Toolkit-Tiles/actions)
 [![Platform](https://img.shields.io/badge/android-platform?style=for-the-badge&label=platform&labelColor=21262d&color=6e7681)](https://www.android.com)
@@ -10,46 +10,51 @@ Toolkit Tiles integrates useful tools directly into your Android Quick Settings 
 
 ![Banner](https://raw.githubusercontent.com/WSTxda/Toolkit-Tiles/main/images/Banner.svg)
 
-Toolkit Tiles enhances your Android experience by adding practical utilities to the Quick Settings panel. These tools leverage your device's built-in sensors for accurate, real-time results, ensuring they're always at your fingertips.
+Designed to make your Android experience smoother and more productive, Toolkit Tiles puts practical tools right at your fingertips. Whether you need a quick measurement, a random decision, or an emergency tool, these tiles make your device capable or funny.
 
-## Features
-
-### Tools Available
+## Available Tools
 
 **🧭 Compass**  
-  Quickly determine your device's orientation and find directions. It displays cardinal directions and degrees for precise navigation.
+  Instantly find your bearings. This tile displays cardinal directions and degrees for precise navigation, using your device's built-in sensors.
 
 **📏 Bubble Level**  
-  Measure the inclination of surfaces with ease, mimicking a traditional spirit level. Ideal for DIY projects, hanging pictures, or checking alignments.
+  Check the alignment of any surface with ease. Perfect for DIY projects, hanging pictures, or making sure furniture is level.
 
-### Key Benefits
+**💡 Lux Meter**  
+  Measure the ambient light intensity in lux. A handy tool for photographers, lighting designers, or anyone curious about their environment.
 
-- **Lightweight and Efficient**: Minimal resource usage with no background processes.
-- **Seamless Integration**: Fits naturally into Android's Quick Settings for one-tap access.
-- **Sensor-Based Accuracy**: Utilizes your device's accelerometer and magnetometer for reliable readings.
-- **No Permissions Overreach**: Only requires sensor access; no internet or storage permissions needed.
+**🎲 Dice Roll**  
+  Need a standard six-sided die? This tile simulates a dice roll, perfect for board games or quick decisions.
 
-### Installation and Usage
+**🪙 Coin Flip**  
+  Let fate decide. Toss a virtual coin to settle a bet or make a choice on the go.
+
+**🔢 Counter**  
+  A set of three tiles (add, remove, reset) that acts as a simple tally counter, helping you keep track of anything you need.
+
+**🆘 SOS**  
+  Activates an SOS signal using your camera's flash. A critical safety tool that could be invaluable in an emergency.
+
+**🔒 Lock Screen**  
+  Lock your device's screen with a single tap, saving your power button from wear and tear.
+
+**📸 Screenshot**  
+  Take a screenshot instantly from your Quick Settings panel. No more fumbling with button combinations.
+
+## Installation and Usage
 
 1. Download and install the latest APK from the [releases page](https://github.com/WSTxda/Toolkit-Tiles/releases/latest).
-2. Swipe down twice from the top of your screen to open the full Quick Settings panel.
-3. Tap the edit button (pencil icon) to customize the panel.
-4. Locate the Toolkit Tiles (Compass and Bubble Level) in the available tiles section.
-5. Drag them to your active Quick Settings area.
-6. Tap any tile to activate the tool instantly.
+2. Swipe down twice from the top of your screen to fully open the Quick Settings panel.
+3. Tap the edit button (usually a pencil icon) to customize the panel.
+4. Find the Toolkit Tiles in the available tiles section and drag them to your active panel.
+5. Tap any tile to use it instantly.
 
 > [!NOTE]
-> **Required Sensors:**
+> ### Requirements & Permissions
 >
-> **🧭 Compass:**
-> - [Rotation Vector Sensor](https://developer.android.com/reference/android/hardware/Sensor#TYPE_ROTATION_VECTOR) (gyro + accelerometer + magnetometer)
-> - [Geomagnetic Rotation Vector](https://developer.android.com/reference/android/hardware/Sensor#TYPE_GEOMAGNETIC_ROTATION_VECTOR) (accelerometer + magnetometer, fallback)
->
-> **📏 Bubble Level:**
-> - [Rotation Vector Sensor](https://developer.android.com/reference/android/hardware/Sensor#TYPE_ROTATION_VECTOR)
-> - [Accelerometer](https://developer.android.com/reference/android/hardware/Sensor#TYPE_ACCELEROMETER) only (fallback, less accurate)
->
-> **Optional:** Gyroscope can improve accuracy for both tiles but is not mandatory.
+> - **Accessibility Service:** Required for **Lock Screen** and **Screenshot** tiles.
+> - **Camera Access:** Required for the **SOS** tile.
+> - **Device Sensors:** **Compass**, **Bubble Level**, and **Lux Meter** require the appropriate sensors (magnetometer, accelerometer, light sensor).
 
 ---
 
